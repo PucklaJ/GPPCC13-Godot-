@@ -19,6 +19,10 @@ config/name="GPPCC13"
 run/main_scene="res://scenes/levels/Level 1.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+globals="*res://scripts/globals.gd"
+
 [importer_defaults]
 
 scene={
@@ -1103,6 +1107,11 @@ toggle_mouse_lock={
 jump={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+toggle_fullscreen={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777254,"unicode":0,"echo":false,"script":null)
  ]
 }
 

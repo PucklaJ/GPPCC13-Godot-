@@ -3,40 +3,19 @@ extends RigidBody
 export var SPEED = 10
 export var JUMP_POWER = 10
 export var ACCELARATION = 100
-export var MOUSE_SENSETIVITY_X = 0.005
-export var MOUSE_SENSETIVITY_Y = 0.005
 export var DAMPING = 1.1
 
 var camera
 var is_grounded
 
-var mouse_motion_x
-var mouse_motion_y
-var mouse_motion_processed
-
 func _ready():
+    globals.player = self
+
     camera = get_node("Camera")
-    mouse_motion_processed = true
-    contact_monitor = true
-    contacts_reported = 2
-    connect("body_shape_entered",self,"_body_shape_entered")
     pass
 
 func _physics_process(delta):
-    process_mouse()
     process_buttons(delta)
-    pass
-
-func _input(event):
-    if event is InputEventMouseMotion:
-        mouse_motion_x = event.relative.x
-        mouse_motion_y = event.relative.y
-        mouse_motion_processed = false
-    elif Input.is_action_just_pressed("toggle_mouse_lock"):
-        if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-            Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-        else:
-            Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
     pass
 
 func process_buttons(delta):
@@ -76,23 +55,6 @@ func process_buttons(delta):
 
     pass
 
-func process_mouse():
-    if !mouse_motion_processed and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-        camera.rotate(get_up(),-mouse_motion_x*MOUSE_SENSETIVITY_X)
-        if camera.rotation.x - mouse_motion_y*MOUSE_SENSETIVITY_Y < PI/2  and camera.rotation.x - mouse_motion_y*MOUSE_SENSETIVITY_Y > -PI/2:
-            camera.rotate(get_right(),-mouse_motion_y*MOUSE_SENSETIVITY_Y)
-        camera.rotation.z = 0
-        mouse_motion_processed = true
-    pass
-
-
-
-
-
-
-
-
-
 func get_forward():
     var cam_forward = camera.get_global_transform().basis.z
     return Vector3(cam_forward.x,0,cam_forward.z).normalized()
@@ -104,9 +66,4 @@ func get_right():
 
 func get_up():
     return Vector3(0,1,0)
-    pass
-
-
-func _body_shape_entered(body_id,body,body_shape,local_shape):
-    print(local_shape)
     pass
