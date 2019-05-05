@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/objects/WallTorch.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/path/Straight.tscn" type="PackedScene" id=2]
+
+[node name="Straight_WallTorch" type="Spatial"]
+
+[node name="Straight" parent="." instance=ExtResource( 2 )]
+
+[node name="TorchControl" type="Spatial" parent="Straight"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3.05396, 0 )
+
+[node name="WallTorch" parent="Straight/TorchControl" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5, 0, 0 )
+
+[node name="WallTorch2" parent="Straight/TorchControl" instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5, 0, 0 )

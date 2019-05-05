@@ -17,6 +17,9 @@ func _input(event):
             Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
         else:
             Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+            mouse_motion_processed = false
+            mouse_motion_x = 0
+            mouse_motion_y = 0
     pass
 
 func _process(delta):

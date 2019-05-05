@@ -25,7 +25,7 @@ func _process(delta):
 [sub_resource type="Environment" id=4]
 background_mode = 1
 ambient_light_color = Color( 1, 1, 1, 1 )
-ambient_light_energy = 0.0
+ambient_light_energy = 0.01
 
 [node name="Player" type="RigidBody"]
 mode = 2
@@ -57,6 +57,3 @@ material/3 = null
 material/4 = null
 script = ExtResource( 3 )
 LIGHTEN = 0.3
-
-[node name="SpotLight" type="SpotLight" parent="Camera"]
-spot_range = 10.6
