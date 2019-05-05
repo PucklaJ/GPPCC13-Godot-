@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Spear.obj-3d9ef9164bdd0386d0d85a58609f0ede.mesh"
+
+[deps]
+
+files=[ "res://.import/Spear.obj-3d9ef9164bdd0386d0d85a58609f0ede.mesh" ]
+
+source_file="res://models/weapons/Spear.obj"
+dest_files=[ "res://.import/Spear.obj-3d9ef9164bdd0386d0d85a58609f0ede.mesh", "res://.import/Spear.obj-3d9ef9164bdd0386d0d85a58609f0ede.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

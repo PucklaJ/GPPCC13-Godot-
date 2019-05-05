@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Sword_Golden.obj-aa775d851d219d15ea4397416f621f42.mesh"
+
+[deps]
+
+files=[ "res://.import/Sword_Golden.obj-aa775d851d219d15ea4397416f621f42.mesh" ]
+
+source_file="res://models/weapons/Sword_Golden.obj"
+dest_files=[ "res://.import/Sword_Golden.obj-aa775d851d219d15ea4397416f621f42.mesh", "res://.import/Sword_Golden.obj-aa775d851d219d15ea4397416f621f42.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

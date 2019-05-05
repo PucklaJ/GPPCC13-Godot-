@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Bow_Wooden2.obj-2267233f21e62c3d05e544dffcdd681b.mesh"
+
+[deps]
+
+files=[ "res://.import/Bow_Wooden2.obj-2267233f21e62c3d05e544dffcdd681b.mesh" ]
+
+source_file="res://models/weapons/Bow_Wooden2.obj"
+dest_files=[ "res://.import/Bow_Wooden2.obj-2267233f21e62c3d05e544dffcdd681b.mesh", "res://.import/Bow_Wooden2.obj-2267233f21e62c3d05e544dffcdd681b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

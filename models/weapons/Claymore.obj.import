@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Claymore.obj-7590d8ce9183e57731e86002e8f1ecec.mesh"
+
+[deps]
+
+files=[ "res://.import/Claymore.obj-7590d8ce9183e57731e86002e8f1ecec.mesh" ]
+
+source_file="res://models/weapons/Claymore.obj"
+dest_files=[ "res://.import/Claymore.obj-7590d8ce9183e57731e86002e8f1ecec.mesh", "res://.import/Claymore.obj-7590d8ce9183e57731e86002e8f1ecec.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

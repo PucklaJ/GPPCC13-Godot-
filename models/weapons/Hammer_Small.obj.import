@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hammer_Small.obj-1dd92f65efb493642881760fdf8fd705.mesh"
+
+[deps]
+
+files=[ "res://.import/Hammer_Small.obj-1dd92f65efb493642881760fdf8fd705.mesh" ]
+
+source_file="res://models/weapons/Hammer_Small.obj"
+dest_files=[ "res://.import/Hammer_Small.obj-1dd92f65efb493642881760fdf8fd705.mesh", "res://.import/Hammer_Small.obj-1dd92f65efb493642881760fdf8fd705.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

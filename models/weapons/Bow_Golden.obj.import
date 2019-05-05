@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Bow_Golden.obj-32f76f7d33b200421de3f954edb3163a.mesh"
+
+[deps]
+
+files=[ "res://.import/Bow_Golden.obj-32f76f7d33b200421de3f954edb3163a.mesh" ]
+
+source_file="res://models/weapons/Bow_Golden.obj"
+dest_files=[ "res://.import/Bow_Golden.obj-32f76f7d33b200421de3f954edb3163a.mesh", "res://.import/Bow_Golden.obj-32f76f7d33b200421de3f954edb3163a.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

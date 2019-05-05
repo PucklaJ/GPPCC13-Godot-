@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Bow_Evil.obj-ac4a8c9f220bf85cf4a1567116ba4938.mesh"
+
+[deps]
+
+files=[ "res://.import/Bow_Evil.obj-ac4a8c9f220bf85cf4a1567116ba4938.mesh" ]
+
+source_file="res://models/weapons/Bow_Evil.obj"
+dest_files=[ "res://.import/Bow_Evil.obj-ac4a8c9f220bf85cf4a1567116ba4938.mesh", "res://.import/Bow_Evil.obj-ac4a8c9f220bf85cf4a1567116ba4938.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

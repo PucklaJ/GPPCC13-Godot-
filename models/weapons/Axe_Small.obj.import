@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Axe_Small.obj-5a6b30889ba6803e60931adca31cd671.mesh"
+
+[deps]
+
+files=[ "res://.import/Axe_Small.obj-5a6b30889ba6803e60931adca31cd671.mesh" ]
+
+source_file="res://models/weapons/Axe_Small.obj"
+dest_files=[ "res://.import/Axe_Small.obj-5a6b30889ba6803e60931adca31cd671.mesh", "res://.import/Axe_Small.obj-5a6b30889ba6803e60931adca31cd671.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

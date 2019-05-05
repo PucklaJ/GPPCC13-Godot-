@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Hammer_Double.obj-84a6830dd21a793080a6b50532ef1c6d.mesh"
+
+[deps]
+
+files=[ "res://.import/Hammer_Double.obj-84a6830dd21a793080a6b50532ef1c6d.mesh" ]
+
+source_file="res://models/weapons/Hammer_Double.obj"
+dest_files=[ "res://.import/Hammer_Double.obj-84a6830dd21a793080a6b50532ef1c6d.mesh", "res://.import/Hammer_Double.obj-84a6830dd21a793080a6b50532ef1c6d.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

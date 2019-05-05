@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Shield_Heater_2.obj-004fb156cc5b5faeda37b936f03ee402.mesh"
+
+[deps]
+
+files=[ "res://.import/Shield_Heater_2.obj-004fb156cc5b5faeda37b936f03ee402.mesh" ]
+
+source_file="res://models/weapons/Shield_Heater_2.obj"
+dest_files=[ "res://.import/Shield_Heater_2.obj-004fb156cc5b5faeda37b936f03ee402.mesh", "res://.import/Shield_Heater_2.obj-004fb156cc5b5faeda37b936f03ee402.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Shield_Round_2.obj-84f58f31cd535a7e3545e77914f2653e.mesh"
+
+[deps]
+
+files=[ "res://.import/Shield_Round_2.obj-84f58f31cd535a7e3545e77914f2653e.mesh" ]
+
+source_file="res://models/weapons/Shield_Round_2.obj"
+dest_files=[ "res://.import/Shield_Round_2.obj-84f58f31cd535a7e3545e77914f2653e.mesh", "res://.import/Shield_Round_2.obj-84f58f31cd535a7e3545e77914f2653e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

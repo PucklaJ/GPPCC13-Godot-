@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Axe_Double.obj-10cb86a9ce38f0397a6226a7fd9ce469.mesh"
+
+[deps]
+
+files=[ "res://.import/Axe_Double.obj-10cb86a9ce38f0397a6226a7fd9ce469.mesh" ]
+
+source_file="res://models/weapons/Axe_Double.obj"
+dest_files=[ "res://.import/Axe_Double.obj-10cb86a9ce38f0397a6226a7fd9ce469.mesh", "res://.import/Axe_Double.obj-10cb86a9ce38f0397a6226a7fd9ce469.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true
