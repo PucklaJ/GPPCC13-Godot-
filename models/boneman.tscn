@@ -3,6 +3,6 @@
 [ext_resource path="res://models/boneman.dae" type="PackedScene" id=1]
 [ext_resource path="res://scripts/boneman.gd" type="Script" id=2]
 
-[node name="boneman" instance=ExtResource( 1 )]
-transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0 )
+[node name="boneman" index="0" instance=ExtResource( 1 )]
+transform = Transform( 0.23, 0, 0, 0, 0.23, 0, 0, 0, 0.23, 0, 0, 0 )
 script = ExtResource( 2 )

@@ -8,6 +8,7 @@ export var MOUSE_SENSETIVITY_Y = 0.005
 export var DAMPING = 1.1
 
 var camera
+var is_grounded
 
 var mouse_motion_x
 var mouse_motion_y
@@ -16,6 +17,9 @@ var mouse_motion_processed
 func _ready():
     camera = get_node("Camera")
     mouse_motion_processed = true
+    contact_monitor = true
+    contacts_reported = 2
+    connect("body_shape_entered",self,"_body_shape_entered")
     pass
 
 func _physics_process(delta):
@@ -67,7 +71,7 @@ func process_buttons(delta):
         linear_velocity.z = vel.z
 
 
-    if Input.is_action_just_pressed("jump"):
+    if is_grounded && Input.is_action_just_pressed("jump"):
         apply_central_impulse(Vector3(0,JUMP_POWER,0))
 
     pass
@@ -100,4 +104,9 @@ func get_right():
 
 func get_up():
     return Vector3(0,1,0)
+    pass
+
+
+func _body_shape_entered(body_id,body,body_shape,local_shape):
+    print(local_shape)
     pass
