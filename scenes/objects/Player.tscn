@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://models/weapons/Sword.obj" type="ArrayMesh" id=2]
@@ -10,35 +10,36 @@
 [ext_resource path="res://scenes/objects/CoinMesh.tscn" type="PackedScene" id=8]
 [ext_resource path="res://misc/CoinSymbolTexture.tres" type="Texture" id=9]
 [ext_resource path="res://scripts/CollectedCoin.gd" type="Script" id=10]
+[ext_resource path="res://scripts/GroundSensors.gd" type="Script" id=11]
 
 [sub_resource type="PhysicsMaterial" id=1]
 
-[sub_resource type="GDScript" id=12]
+[sub_resource type="GDScript" id=2]
 script/source = "extends Viewport
 
 func _ready():
 	own_world = true
 	pass"
 
-[sub_resource type="GDScript" id=10]
+[sub_resource type="GDScript" id=3]
 script/source = "extends MeshInstance
 
 func _process(delta):
 	rotate_y(PI*delta)
 	pass"
 
-[sub_resource type="Environment" id=11]
+[sub_resource type="Environment" id=4]
 background_color = Color( 1, 1, 1, 0 )
 ambient_light_color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="GDScript" id=7]
+[sub_resource type="GDScript" id=5]
 script/source = "extends Control
 onready var tsize = get_child(0).texture.get_size()
 func _process(delta):
 	margin_left = OS.get_real_window_size().x/2.0-tsize.x/2.0
 	pass"
 
-[sub_resource type="Shader" id=5]
+[sub_resource type="Shader" id=6]
 code = "shader_type canvas_item;
 
 uniform vec4 color : hint_color;
@@ -49,11 +50,11 @@ void fragment() {
 	COLOR = vec4(bright,bright,bright,COLOR.a)*color;
 }"
 
-[sub_resource type="ShaderMaterial" id=6]
-shader = SubResource( 5 )
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
 shader_param/color = Color( 1, 0.117647, 0, 1 )
 
-[sub_resource type="GDScript" id=13]
+[sub_resource type="GDScript" id=8]
 script/source = "extends Node
 
 onready var collected_coin = get_child(0)
@@ -65,25 +66,154 @@ func new_collected_coin():
 	new_coin.collect()
 	pass"
 
-[sub_resource type="CapsuleShape" id=2]
+[sub_resource type="CapsuleShape" id=9]
 
-[sub_resource type="GDScript" id=3]
-script/source = "extends RayCast
-
-var player
-
-func _ready():
-	player = get_parent()
-	pass
-	
-func _process(delta):
-	player.is_grounded = is_colliding()
-	pass"
-
-[sub_resource type="Environment" id=4]
+[sub_resource type="Environment" id=11]
 background_mode = 1
 ambient_light_color = Color( 1, 1, 1, 1 )
 ambient_light_energy = 0.01
+
+[sub_resource type="Animation" id=13]
+resource_name = "idle"
+length = 2.0
+loop = true
+tracks/0/type = "transform"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = PoolRealArray(  )
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:translation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.743309, -0.777437, -1.05639 ), Vector3( 0.743309, -0.946093, -1.05639 ), Vector3( 0.743309, -0.777437, -1.05639 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -90, 0 ), Vector3( -5.361, -90, 0 ), Vector3( 0, -90, 0 ), Vector3( 5.361, -90, 0 ), Vector3( 0, -90, 0 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "jump"
+length = 0.5
+tracks/0/type = "transform"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = PoolRealArray(  )
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:translation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.743128, -0.920224, -1.05616 ), Vector3( 0.743, 0, -1.056 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -90, 0 ), Vector3( 0, -90, -20 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "jump_mid"
+length = 0.8
+loop = true
+tracks/0/type = "transform"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = PoolRealArray(  )
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0.743, 0, -1.056 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -90, -20 ), Vector3( -2.5, -90, -20 ), Vector3( 0, -90, -20 ), Vector3( 2.5, -90, -20 ), Vector3( 0, -90, -20 ), Vector3( -2.5, -90, -20 ), Vector3( 0, -90, -20 ), Vector3( 2.5, -90, -20 ), Vector3( 0, -90, -20 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "walk"
+loop = true
+tracks/0/type = "transform"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = PoolRealArray(  )
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:translation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.743308, -0.770286, -1.05639 ), Vector3( 0.743, -1, -1.056 ), Vector3( 0.743, -0.77, -1.056 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -90, -20 ), Vector3( 0, -90, 50 ), Vector3( 0, -90, -20 ) ]
+}
 
 [node name="Player" type="RigidBody"]
 mode = 2
@@ -100,15 +230,15 @@ margin_bottom = 40.0
 size = Vector2( 75, 75 )
 transparent_bg = true
 render_target_v_flip = true
-script = SubResource( 12 )
+script = SubResource( 2 )
 
 [node name="Coin" parent="HUD/Coins/CoinViewport" instance=ExtResource( 8 )]
 transform = Transform( 0.75, 0, 0, 0, -3.27835e-08, -0.75, 0, 0.75, -3.27835e-08, 10, 0, 0 )
-script = SubResource( 10 )
+script = SubResource( 3 )
 
 [node name="Camera" type="Camera" parent="HUD/Coins/CoinViewport"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 2 )
-environment = SubResource( 11 )
+environment = SubResource( 4 )
 current = true
 fov = 50.0
 
@@ -136,7 +266,7 @@ margin_left = 540.0
 margin_top = 20.0
 margin_right = -540.0
 margin_bottom = 61.0
-script = SubResource( 7 )
+script = SubResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -146,14 +276,14 @@ texture = ExtResource( 6 )
 centered = false
 
 [node name="Foreground" type="Sprite" parent="HUD/Lifebar"]
-material = SubResource( 6 )
+material = SubResource( 7 )
 texture = ExtResource( 5 )
 centered = false
 script = ExtResource( 7 )
 HEALTH_SPEED = 0.3
 
 [node name="CollectedCoins" type="Node" parent="HUD"]
-script = SubResource( 13 )
+script = SubResource( 8 )
 
 [node name="CollectedCoin" type="Sprite" parent="HUD/CollectedCoins"]
 position = Vector2( 640, 360 )
@@ -161,23 +291,42 @@ texture = ExtResource( 9 )
 script = ExtResource( 10 )
 MOVE_TIME = 1.0
 
+[node name="GroundSensors" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.988814, 0 )
+script = ExtResource( 11 )
+
+[node name="GroundSensor" type="RayCast" parent="GroundSensors"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5 )
+enabled = true
+
+[node name="GroundSensor2" type="RayCast" parent="GroundSensors"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -0.5 )
+enabled = true
+
+[node name="GroundSensor3" type="RayCast" parent="GroundSensors"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.5 )
+enabled = true
+
+[node name="GroundSensor4" type="RayCast" parent="GroundSensors"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5 )
+enabled = true
+
+[node name="GroundSensor5" type="RayCast" parent="GroundSensors"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0 )
+enabled = true
+
 [node name="Capsule" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.51287, 0 )
-shape = SubResource( 2 )
-
-[node name="GroundSensor" type="RayCast" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0 )
-enabled = true
-script = SubResource( 3 )
+shape = SubResource( 9 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.52855, 0 )
-environment = SubResource( 4 )
+environment = SubResource( 11 )
 current = true
 script = ExtResource( 4 )
 
 [node name="Weapon" type="MeshInstance" parent="Camera"]
-transform = Transform( 0.00715277, 0, -0.499949, 0, 0.5, 0, 0.499949, 0, 0.00715277, 0.743308, -0.770286, -1.05639 )
+transform = Transform( -2.05376e-08, -7.47509e-09, -0.5, -0.17101, 0.469846, 0, 0.469846, 0.17101, -2.18557e-08, 0.743, 0, -1.056 )
 mesh = ExtResource( 2 )
 material/0 = null
 material/1 = null
@@ -186,3 +335,11 @@ material/3 = null
 material/4 = null
 script = ExtResource( 3 )
 LIGHTEN = 0.3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera/Weapon"]
+anims/idle = SubResource( 13 )
+anims/jump = SubResource( 14 )
+anims/jump_mid = SubResource( 15 )
+anims/walk = SubResource( 12 )
+next/jump = "jump_mid"
+blend_times = [ "jump", "jump_mid", 0.5 ]
