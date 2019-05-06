@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Pirate Coin.obj-4494ab66287c70fc852536e92e4dfa8b.mesh"
+
+[deps]
+
+files=[ "res://.import/Pirate Coin.obj-4494ab66287c70fc852536e92e4dfa8b.mesh" ]
+
+source_file="res://models/Pirate Coin.obj"
+dest_files=[ "res://.import/Pirate Coin.obj-4494ab66287c70fc852536e92e4dfa8b.mesh", "res://.import/Pirate Coin.obj-4494ab66287c70fc852536e92e4dfa8b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true
