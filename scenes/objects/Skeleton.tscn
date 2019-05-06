@@ -14,7 +14,7 @@ mode = 2
 mass = 5.0
 physics_material_override = SubResource( 1 )
 script = ExtResource( 2 )
-MOVE_SPEED = 0
+MOVE_SPEED = 1
 
 [node name="boneman" parent="." instance=ExtResource( 1 )]
 
