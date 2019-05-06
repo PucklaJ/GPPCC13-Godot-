@@ -14,7 +14,7 @@ func _ready():
     globals.player = self
 
     camera = get_node("Camera")
-    health = MAX_HEALTH
+    health = 2.0
     pass
 
 func _physics_process(delta):

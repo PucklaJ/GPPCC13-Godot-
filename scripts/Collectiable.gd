@@ -13,7 +13,7 @@ func _ready():
     pass
 
 func _process(delta):
-    collectiable_mesh.rotate_y(ROTATE_SPEED/180*PI*delta)
+    rotate_y(ROTATE_SPEED/180*PI*delta)
     pass
 
 func on_body_entered(body):

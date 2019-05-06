@@ -1,0 +1,18 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Meat.obj-a49cfa01dd4c36c03d151c76fdd0181f.mesh"
+
+[deps]
+
+files=[ "res://.import/Meat.obj-a49cfa01dd4c36c03d151c76fdd0181f.mesh" ]
+
+source_file="res://models/Meat.obj"
+dest_files=[ "res://.import/Meat.obj-a49cfa01dd4c36c03d151c76fdd0181f.mesh", "res://.import/Meat.obj-a49cfa01dd4c36c03d151c76fdd0181f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+optimize_mesh=true

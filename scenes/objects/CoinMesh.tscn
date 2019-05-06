@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://models/Pirate Coin.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://scripts/Coin.gd" type="Script" id=2]
+[ext_resource path="res://textures/Pirate Coin_normals-_small.png" type="Texture" id=3]
+[ext_resource path="res://textures/Pirate Coin_default_color_small.png" type="Texture" id=4]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 4 )
+metallic = 0.5
+roughness = 0.3
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 3 )
+
+[node name="Coin" type="MeshInstance"]
+transform = Transform( 0.75, 0, 0, 0, -3.27835e-08, -0.75, 0, 0.75, -3.27835e-08, 0, 0, 0 )
+mesh = ExtResource( 1 )
+material/0 = SubResource( 1 )
+script = ExtResource( 2 )
