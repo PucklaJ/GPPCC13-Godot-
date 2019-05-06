@@ -4,14 +4,17 @@ export var SPEED = 10
 export var JUMP_POWER = 10
 export var ACCELARATION = 100
 export var DAMPING = 1.1
+export var MAX_HEALTH = 5.0
 
 var camera
 var is_grounded
+var health
 
 func _ready():
     globals.player = self
 
     camera = get_node("Camera")
+    health = MAX_HEALTH
     pass
 
 func _physics_process(delta):

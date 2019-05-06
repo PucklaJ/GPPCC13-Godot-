@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://models/weapons/Sword.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://scripts/Weapon.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Camera.gd" type="Script" id=4]
+[ext_resource path="res://textures/bar2.png" type="Texture" id=5]
+[ext_resource path="res://textures/bar.png" type="Texture" id=6]
+[ext_resource path="res://scripts/LifebarBar.gd" type="Script" id=7]
 
 [sub_resource type="PhysicsMaterial" id=1]
 
@@ -26,6 +29,28 @@ func _process(delta):
 background_mode = 1
 ambient_light_color = Color( 1, 1, 1, 1 )
 ambient_light_energy = 0.01
+
+[sub_resource type="GDScript" id=7]
+script/source = "extends Control
+onready var tsize = get_child(0).texture.get_size()
+func _process(delta):
+	margin_left = OS.get_real_window_size().x/2.0-tsize.x/2.0
+	pass"
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+uniform vec4 color : hint_color;
+
+void fragment() {
+	COLOR = texture(TEXTURE,UV);
+	float bright = (COLOR.r+COLOR.g+COLOR.b)/3.0;
+	COLOR = vec4(bright,bright,bright,COLOR.a)*color;
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+shader_param/color = Color( 1, 0.117647, 0, 1 )
 
 [node name="Player" type="RigidBody"]
 mode = 2
@@ -57,3 +82,24 @@ material/3 = null
 material/4 = null
 script = ExtResource( 3 )
 LIGHTEN = 0.3
+
+[node name="Lifebar" type="Control" parent="."]
+anchor_right = 1.0
+margin_left = 540.0
+margin_top = 41.0
+margin_right = -540.0
+margin_bottom = 82.0
+script = SubResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Background" type="Sprite" parent="Lifebar"]
+texture = ExtResource( 6 )
+centered = false
+
+[node name="Foreground" type="Sprite" parent="Lifebar"]
+material = SubResource( 6 )
+texture = ExtResource( 5 )
+centered = false
+script = ExtResource( 7 )
