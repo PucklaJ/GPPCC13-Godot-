@@ -43,11 +43,15 @@ func _process(delta):
 		var vel = player.linear_velocity
 		vel.y = 0
 		if vel.length_squared() > 0.1:
-			anim_tree.set(BLEND_AMOUNT1,min(anim_tree.get(BLEND_AMOUNT1)+BLEND_IDLE_SPEED*delta,1.0))
+			blend_anim(BLEND_AMOUNT1,BLEND_IDLE_SPEED*delta)
 		else:
-			anim_tree.set(BLEND_AMOUNT1,max(anim_tree.get(BLEND_AMOUNT1)-BLEND_WALK_SPEED*delta,0.0))
-		anim_tree.set(BLEND_AMOUNT2,max(anim_tree.get(BLEND_AMOUNT2)-BLEND_JUMP_SPEED*delta,0.0))
+			blend_anim(BLEND_AMOUNT1,-BLEND_WALK_SPEED*delta)
+		blend_anim(BLEND_AMOUNT2,-BLEND_JUMP_SPEED*delta)
 	else:
-		anim_tree.set(BLEND_AMOUNT2,min(anim_tree.get(BLEND_AMOUNT2)+BLEND_JUMP_SPEED*delta,1.0))
+		blend_anim(BLEND_AMOUNT2,BLEND_JUMP_SPEED*delta)
 	
+	pass
+
+func blend_anim(blend_amount,speed):
+	anim_tree.set(blend_amount,clamp(anim_tree.get(blend_amount)+speed,0.0,1.0))
 	pass

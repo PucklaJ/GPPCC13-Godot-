@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://models/weapons/Sword.obj" type="ArrayMesh" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://misc/CoinSymbolTexture.tres" type="Texture" id=9]
 [ext_resource path="res://scripts/CollectedCoin.gd" type="Script" id=10]
 [ext_resource path="res://scripts/GroundSensors.gd" type="Script" id=11]
+[ext_resource path="res://textures/crosshairs64.png" type="Texture" id=12]
 
 [sub_resource type="PhysicsMaterial" id=1]
 
@@ -64,6 +65,41 @@ func new_collected_coin():
 	new_coin.coin_num = globals.coins
 	add_child(new_coin)
 	new_coin.collect()
+	pass"
+
+[sub_resource type="Shader" id=22]
+code = "shader_type canvas_item;
+
+uniform vec4 key_color : hint_color;
+uniform float key_color_padding : hint_range(0.0,1.0);
+
+bool apply_key_color(vec4 color) {
+	if(color.r - key_color.r < key_color_padding &&
+	   color.g - key_color.g < key_color_padding &&
+	   color.b - key_color.b < key_color_padding) {
+	   return true;
+	}
+	
+	return false;
+}
+
+void fragment() {
+	COLOR = texture(TEXTURE,UV);
+	if(apply_key_color(COLOR)) discard;
+}
+
+"
+
+[sub_resource type="ShaderMaterial" id=23]
+shader = SubResource( 22 )
+shader_param/key_color = null
+shader_param/key_color_padding = 0.4
+
+[sub_resource type="GDScript" id=24]
+script/source = "extends Sprite
+
+func _process(delta):
+	position = OS.get_real_window_size()/2
 	pass"
 
 [sub_resource type="CapsuleShape" id=9]
@@ -243,7 +279,7 @@ animation = "jump_mid"
 animation = "walk"
 
 [sub_resource type="AnimationNodeBlendTree" id=19]
-graph_offset = Vector2( -33.4864, 93.9518 )
+graph_offset = Vector2( -33.4864, 133.721 )
 nodes/Idle/node = SubResource( 17 )
 nodes/Idle/position = Vector2( 160, 140 )
 nodes/IdleWalkBlend/node = SubResource( 18 )
@@ -333,6 +369,15 @@ texture = ExtResource( 9 )
 script = ExtResource( 10 )
 MOVE_TIME = 1.0
 
+[node name="Crosshair" type="Sprite" parent="HUD"]
+material = SubResource( 23 )
+position = Vector2( 640, 360 )
+texture = ExtResource( 12 )
+vframes = 8
+hframes = 8
+frame = 19
+script = SubResource( 24 )
+
 [node name="GroundSensors" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.988814, 0 )
 script = ExtResource( 11 )
@@ -370,7 +415,7 @@ AXIS_SENSITIVITY_X = 25.0
 AXIS_SENSITIVITY_Y = 25.0
 
 [node name="Weapon" type="MeshInstance" parent="Camera"]
-transform = Transform( -1.6963e-08, 1.3776e-08, -0.499912, 0.315159, 0.388068, 0, 0.388068, -0.315159, -2.18519e-08, 0.743034, -0.98735, -1.05604 )
+transform = Transform( -2.17535e-08, -2.07522e-09, -0.499912, -0.0474756, 0.497661, 0, 0.497661, 0.0474756, -2.18519e-08, 0.742995, -0.810677, -1.05599 )
 mesh = ExtResource( 2 )
 material/0 = null
 material/1 = null
