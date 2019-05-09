@@ -68,7 +68,7 @@ func new_collected_coin():
 	new_coin.collect()
 	pass"
 
-[sub_resource type="Shader" id=22]
+[sub_resource type="Shader" id=9]
 code = "shader_type canvas_item;
 
 uniform vec4 key_color : hint_color;
@@ -91,28 +91,31 @@ void fragment() {
 
 "
 
-[sub_resource type="ShaderMaterial" id=23]
-shader = SubResource( 22 )
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 9 )
 shader_param/key_color = null
 shader_param/key_color_padding = 0.4
 
-[sub_resource type="GDScript" id=24]
+[sub_resource type="GDScript" id=11]
 script/source = "extends Sprite
 
 func _process(delta):
 	position = OS.get_real_window_size()/2
 	pass"
 
-[sub_resource type="CapsuleShape" id=9]
+[sub_resource type="CapsuleShape" id=12]
 
-[sub_resource type="Environment" id=10]
+[sub_resource type="Environment" id=13]
 background_mode = 1
 ambient_light_color = Color( 1, 1, 1, 1 )
 ambient_light_energy = 0.01
 
-[sub_resource type="Animation" id=11]
-resource_name = "attack1"
+[sub_resource type="BoxShape" id=24]
+extents = Vector3( 0.5, 2.2, 0.5 )
+
+[sub_resource type="Animation" id=14]
 length = 0.9
+step = 0.05
 tracks/0/type = "transform"
 tracks/0/path = NodePath(".")
 tracks/0/interp = 2
@@ -127,10 +130,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.5, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.35, 0.5, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0.743309, -0.777437, -1.05639 ), Vector3( 1.04812, -0.167925, -0.345378 ), Vector3( -0.61484, -0.714067, -1.65862 ), Vector3( 0.743, -0.777, -1.056 ) ]
+"values": [ Vector3( 0.743309, -0.777437, -1.05639 ), Vector3( 0.975689, -0.280529, -0.57233 ), Vector3( -0.210322, -0.407173, -1.18782 ), Vector3( -1.184, -1.0114, -1.774 ), Vector3( 0.743309, -0.777437, -1.05639 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath(".:rotation_degrees")
@@ -139,19 +142,19 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 0.5, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.35, 0.5, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, -90, 0 ), Vector3( -54.8436, -90, 3.55606e-06 ), Vector3( -82.2428, 17.0537, 56.6815 ), Vector3( 0, -90, 0 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 34.1568, 0, 0 ), Vector3( -15.4939, 75.5206, -91.1654 ), Vector3( -1.06064, 172.803, -105.034 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/3/type = "method"
-tracks/3/path = NodePath(".")
+tracks/3/path = NodePath("Weapon")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.3, 0.5, 0.6, 0.9 ),
+"times": PoolRealArray( 0.3, 0.4, 0.75, 0.9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -168,7 +171,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=15]
 length = 2.0
 loop = true
 tracks/0/type = "transform"
@@ -200,10 +203,10 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, -90, 0 ), Vector3( -5.361, -90, 0 ), Vector3( 0, -90, 0 ), Vector3( 5.361, -90, 0 ), Vector3( 0, -90, 0 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( -5.361, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 5.361, 0, 0 ), Vector3( 0, 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=16]
 length = 0.8
 loop = true
 tracks/0/type = "transform"
@@ -235,10 +238,10 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, -90, -20 ), Vector3( -2.5, -90, -20 ), Vector3( 0, -90, -20 ), Vector3( 2.5, -90, -20 ), Vector3( 0, -90, -20 ), Vector3( -2.5, -90, -20 ), Vector3( 0, -90, -20 ), Vector3( 2.5, -90, -20 ), Vector3( 0, -90, -20 ) ]
+"values": [ Vector3( 9, 0, 0 ), Vector3( 8.96547, 0.790867, 5.062 ), Vector3( 9, 0, 0 ), Vector3( 8.96547, -0.790867, -5.062 ), Vector3( 9, 0, 0 ), Vector3( 8.96547, 0.790867, 5.062 ), Vector3( 9, 0, 0 ), Vector3( 8.96547, -0.790867, -5.062 ), Vector3( 9, 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=17]
 loop = true
 tracks/0/type = "transform"
 tracks/0/path = NodePath(".")
@@ -269,39 +272,36 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.5, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, -90, -20 ), Vector3( 0, -90, 50 ), Vector3( 0, -90, -20 ) ]
+"values": [ Vector3( 20, 0, 0 ), Vector3( -50, 0, 0 ), Vector3( 20, 0, 0 ) ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=17]
+[sub_resource type="AnimationNodeAnimation" id=18]
 animation = "idle"
 
-[sub_resource type="AnimationNodeBlend2" id=18]
+[sub_resource type="AnimationNodeBlend2" id=19]
 
-[sub_resource type="AnimationNodeAnimation" id=21]
+[sub_resource type="AnimationNodeAnimation" id=20]
 animation = "jump_mid"
 
-[sub_resource type="AnimationNodeBlend2" id=20]
+[sub_resource type="AnimationNodeBlend2" id=21]
 
-[sub_resource type="AnimationNodeAnimation" id=16]
+[sub_resource type="AnimationNodeAnimation" id=22]
 animation = "walk"
 
-[sub_resource type="AnimationNodeBlendTree" id=19]
+[sub_resource type="AnimationNodeBlendTree" id=23]
 graph_offset = Vector2( -33.4864, 133.721 )
-nodes/Idle/node = SubResource( 17 )
+nodes/Idle/node = SubResource( 18 )
 nodes/Idle/position = Vector2( 160, 140 )
-nodes/IdleWalkBlend/node = SubResource( 18 )
+nodes/IdleWalkBlend/node = SubResource( 19 )
 nodes/IdleWalkBlend/position = Vector2( 480, 140 )
-"nodes/Jump Mid/node" = SubResource( 21 )
+"nodes/Jump Mid/node" = SubResource( 20 )
 "nodes/Jump Mid/position" = Vector2( 160, 380 )
-nodes/JumpBlend/node = SubResource( 20 )
+nodes/JumpBlend/node = SubResource( 21 )
 nodes/JumpBlend/position = Vector2( 760, 140 )
-nodes/Walk/node = SubResource( 16 )
+nodes/Walk/node = SubResource( 22 )
 nodes/Walk/position = Vector2( 160, 260 )
 nodes/output/position = Vector2( 1020, 140 )
-node_connections = [ "output", 0, "JumpBlend", "JumpBlend", 0, "IdleWalkBlend", "JumpBlend", 1, "Jump Mid", "IdleWalkBlend", 0, "Idle", "IdleWalkBlend", 1, "Walk" ]
-
-[sub_resource type="BoxShape" id=25]
-extents = Vector3( 0.5, 2.2, 0.5 )
+node_connections = [ "output", 0, "JumpBlend", "IdleWalkBlend", 0, "Idle", "IdleWalkBlend", 1, "Walk", "JumpBlend", 0, "IdleWalkBlend", "JumpBlend", 1, "Jump Mid" ]
 
 [node name="Player" type="RigidBody"]
 collision_mask = 6
@@ -381,13 +381,13 @@ script = ExtResource( 10 )
 MOVE_TIME = 1.0
 
 [node name="Crosshair" type="Sprite" parent="HUD"]
-material = SubResource( 23 )
+material = SubResource( 10 )
 position = Vector2( 640, 360 )
 texture = ExtResource( 12 )
 vframes = 8
 hframes = 8
 frame = 19
-script = SubResource( 24 )
+script = SubResource( 11 )
 
 [node name="GroundSensors" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.988814, 0 )
@@ -420,18 +420,24 @@ collision_mask = 6
 
 [node name="Capsule" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.51287, 0 )
-shape = SubResource( 9 )
+shape = SubResource( 12 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.52855, 0 )
-environment = SubResource( 10 )
+environment = SubResource( 13 )
 current = true
 script = ExtResource( 4 )
 AXIS_SENSITIVITY_X = 25.0
 AXIS_SENSITIVITY_Y = 25.0
 
-[node name="Weapon" type="MeshInstance" parent="Camera"]
-transform = Transform( 0.14116, -0.479252, 0.019792, 0.0563948, 0.0370705, 0.495424, -0.476333, -0.137636, 0.0645203, -0.61484, -0.714067, -1.65862 )
+[node name="WeaponContainer" type="Spatial" parent="Camera"]
+transform = Transform( 0.347772, 0.266555, 0.89889, -0.600691, 0.799467, -0.00467063, -0.719878, -0.538331, 0.43815, 0.0342438, -0.884871, -1.33023 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Weapon" type="MeshInstance" parent="Camera/WeaponContainer"]
+transform = Transform( -2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0, 0, 0 )
 mesh = ExtResource( 2 )
 material/0 = null
 material/1 = null
@@ -439,26 +445,26 @@ material/2 = null
 material/3 = null
 material/4 = null
 script = ExtResource( 3 )
-LIGHTEN = 0.3
+LIGHTEN = 0.0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera/Weapon"]
-anims/attack1 = SubResource( 11 )
-anims/idle = SubResource( 12 )
-anims/jump_mid = SubResource( 14 )
-anims/walk = SubResource( 15 )
-blend_times = [ "jump", "jump_mid", 0.5 ]
-
-[node name="AnimationTree" type="AnimationTree" parent="Camera/Weapon"]
-tree_root = SubResource( 19 )
-anim_player = NodePath("../AnimationPlayer")
-parameters/IdleWalkBlend/blend_amount = 1.0
-parameters/JumpBlend/blend_amount = 0.0
-
-[node name="Hitbox" type="Area" parent="Camera/Weapon"]
+[node name="Hitbox" type="Area" parent="Camera/WeaponContainer/Weapon"]
 monitoring = false
 collision_mask = 2
 script = ExtResource( 13 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Camera/Weapon/Hitbox"]
-transform = Transform( 1, 0, -2.84217e-14, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0 )
-shape = SubResource( 25 )
+[node name="CollisionShape" type="CollisionShape" parent="Camera/WeaponContainer/Weapon/Hitbox"]
+transform = Transform( 1, 0, -9.31323e-10, 2.98023e-08, 0.999999, -9.31323e-10, -9.31323e-10, 0, 0.999999, 0, 0, 0 )
+shape = SubResource( 24 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera/WeaponContainer"]
+anims/attack1 = SubResource( 14 )
+anims/idle = SubResource( 15 )
+anims/jump_mid = SubResource( 16 )
+anims/walk = SubResource( 17 )
+blend_times = [ "jump", "jump_mid", 0.5 ]
+
+[node name="AnimationTree" type="AnimationTree" parent="Camera/WeaponContainer"]
+tree_root = SubResource( 23 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/IdleWalkBlend/blend_amount = 1.0
+parameters/JumpBlend/blend_amount = 0.0

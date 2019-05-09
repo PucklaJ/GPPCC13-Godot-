@@ -1,12 +1,15 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/objects/CoinMesh.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/weapons/Hammer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/WeaponCollect.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Collectiable.gd" type="Script" id=4]
+[ext_resource path="res://scenes/weapons/Sword.tscn" type="PackedScene" id=5]
 [ext_resource path="res://models/Meat.obj" type="ArrayMesh" id=6]
 [ext_resource path="res://scripts/Meat.gd" type="Script" id=7]
 [ext_resource path="res://textures/Meat.png" type="Texture" id=8]
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=1]
 resource_name = "Meat"
 albedo_texture = ExtResource( 8 )
 metallic_specular = 0.7
@@ -25,9 +28,19 @@ transform = Transform( 0.75, 0, 0, 0, -3.27835e-08, -0.75, 0, 0.75, -3.27835e-08
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0.426661 )
 visible = false
 mesh = ExtResource( 6 )
-material/0 = SubResource( 3 )
-material/1 = SubResource( 3 )
+material/0 = SubResource( 1 )
+material/1 = SubResource( 1 )
 script = ExtResource( 7 )
+
+[node name="Hammer" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0, 0, 1, -0.128467, 1.58392, 0 )
+visible = false
+script = ExtResource( 3 )
+
+[node name="Sword" parent="." instance=ExtResource( 5 )]
+transform = Transform( -3.92593e-08, 0.439691, -0.898149, 1.92195e-08, 0.898149, 0.439691, 1, 0, -4.37114e-08, -0.128467, 1.58392, 0 )
+visible = false
+script = ExtResource( 3 )
 
 [node name="Area" type="Area" parent="."]
 

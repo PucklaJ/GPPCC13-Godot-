@@ -3,9 +3,9 @@ extends MeshInstance
 export var LIGHTEN = 0.5
 export var DAMAGE = 1.0
 
-onready var anim = get_child(0)
-onready var player = get_parent().get_parent()
-onready var anim_tree = get_node("AnimationTree")
+onready var anim = get_node("../AnimationPlayer")
+onready var player = get_parent().get_parent().get_parent()
+onready var anim_tree = get_node("../AnimationTree")
 onready var hitbox = get_node("Hitbox")
 
 const BLEND_AMOUNT1 = "parameters/IdleWalkBlend/blend_amount"
@@ -80,4 +80,5 @@ func init_weapon_mesh():
 		material.albedo_color.g += LIGHTEN
 		material.albedo_color.b += LIGHTEN
 		i+=1
+	hitbox.set_hitbox_shape()
 	pass
