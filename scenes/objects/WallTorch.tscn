@@ -79,7 +79,9 @@ material/0 = SubResource( 1 )
 [node name="OmniLight" type="OmniLight" parent="WallTorchMesh"]
 transform = Transform( 0.666667, 0, 0, 0, 0.666667, 0, 0, 0, 0.666667, 0.0657127, 2.35247, -0.0173914 )
 light_color = Color( 0.909804, 0.537255, 0.266667, 1 )
-light_energy = 1.41
+light_energy = 2.01
+light_indirect_energy = 0.0
+light_bake_mode = 0
 omni_range = 35.0
 omni_attenuation = 1.51572
 script = SubResource( 2 )

@@ -1135,3 +1135,13 @@ main_attack={
 
 3d/physics_engine="GodotPhysics"
 3d/default_gravity=25.0
+
+[rendering]
+
+quality/reflections/texture_array_reflections=false
+quality/reflections/high_quality_ggx=false
+quality/subsurface_scattering/quality=0
+quality/subsurface_scattering/weight_samples=false
+quality/voxel_cone_tracing/high_quality=false
+quality/filters/msaa=2
+quality/depth/hdr=false
