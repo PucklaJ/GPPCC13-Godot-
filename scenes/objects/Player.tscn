@@ -151,9 +151,15 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.6, 0.9 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.3, 0.5, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "attack_can_damage"
+}, {
+"args": [  ],
+"method": "attack_cant_damage"
+}, {
 "args": [  ],
 "method": "attack_main_unlock"
 }, {
@@ -425,7 +431,7 @@ AXIS_SENSITIVITY_X = 25.0
 AXIS_SENSITIVITY_Y = 25.0
 
 [node name="Weapon" type="MeshInstance" parent="Camera"]
-transform = Transform( -2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0.743, -0.777, -1.056 )
+transform = Transform( 0.14116, -0.479252, 0.019792, 0.0563948, 0.0370705, 0.495424, -0.476333, -0.137636, 0.0645203, -0.61484, -0.714067, -1.65862 )
 mesh = ExtResource( 2 )
 material/0 = null
 material/1 = null
@@ -449,6 +455,7 @@ parameters/IdleWalkBlend/blend_amount = 1.0
 parameters/JumpBlend/blend_amount = 0.0
 
 [node name="Hitbox" type="Area" parent="Camera/Weapon"]
+monitoring = false
 collision_mask = 2
 script = ExtResource( 13 )
 

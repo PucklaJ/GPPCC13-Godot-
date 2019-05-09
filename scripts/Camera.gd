@@ -6,12 +6,14 @@ export var AXIS_SENSITIVITY_X = 100.0
 export var AXIS_SENSITIVITY_Y = 100.0
 export var AXIS_DEADZONE = 0.1
 
+onready var joy_axis_curve = load("res://misc/JoyAxisSensitivityCurve.tres")
+
 const JOY_AXIS_VERTICAL = JOY_AXIS_3
 const JOY_AXIS_HORIZONTAL = JOY_AXIS_2
 const JOY_DEVICE = 0
 
-var mouse_motion_x
-var mouse_motion_y
+var mouse_motion_x = 0
+var mouse_motion_y = 0
 var mouse_motion_processed = true
 
 func _input(event):
@@ -44,10 +46,12 @@ func read_axis_values():
     var axis_value_y = Input.get_joy_axis(JOY_DEVICE,JOY_AXIS_VERTICAL)
     var axis_value_x = Input.get_joy_axis(JOY_DEVICE,JOY_AXIS_HORIZONTAL)
     if abs(axis_value_x) > AXIS_DEADZONE:
-        mouse_motion_x = axis_value_x * AXIS_SENSITIVITY_X
+        var strength = joy_axis_curve.interpolate(abs(axis_value_x))
+        mouse_motion_x = sign(axis_value_x) * strength * AXIS_SENSITIVITY_X
         mouse_motion_processed = false
     if abs(axis_value_y) > AXIS_DEADZONE:
-        mouse_motion_y = axis_value_y * AXIS_SENSITIVITY_Y
+        var strength = joy_axis_curve.interpolate(abs(axis_value_y))
+        mouse_motion_y = sign(axis_value_y) * strength * AXIS_SENSITIVITY_Y
         mouse_motion_processed = false
     pass
 

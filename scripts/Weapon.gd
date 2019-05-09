@@ -6,6 +6,7 @@ export var DAMAGE = 1.0
 onready var anim = get_child(0)
 onready var player = get_parent().get_parent()
 onready var anim_tree = get_node("AnimationTree")
+onready var hitbox = get_node("Hitbox")
 
 const BLEND_AMOUNT1 = "parameters/IdleWalkBlend/blend_amount"
 const BLEND_AMOUNT2 = "parameters/JumpBlend/blend_amount"
@@ -23,19 +24,18 @@ func attack_main_finished():
 	anim_tree.active = true
 	pass
 
+func attack_can_damage():
+	hitbox.set_monitoring(true)
+	pass
+
+func attack_cant_damage():
+	hitbox.set_monitoring(false)
+	pass
+
 func _ready():
 	anim_tree.active = true
 
-	var i = 0
-	while i<mesh.get_surface_count():
-		var material = mesh.surface_get_material(i)
-		if !material:
-			i+=1
-			continue
-		material.albedo_color.r += LIGHTEN
-		material.albedo_color.g += LIGHTEN
-		material.albedo_color.b += LIGHTEN
-		i+=1
+	init_weapon_mesh()
 
 	for animation in anim.get_animation_list():
 		if animation.begins_with("attack"):
@@ -67,4 +67,17 @@ func blend_anim(blend_amount,speed):
 
 func play_attack_animation():
 	anim.play(attack_animations[floor(rand_range(0,attack_animations.size()))])
+	pass
+
+func init_weapon_mesh():
+	var i = 0
+	while i<mesh.get_surface_count():
+		var material = mesh.surface_get_material(i)
+		if !material:
+			i+=1
+			continue
+		material.albedo_color.r += LIGHTEN
+		material.albedo_color.g += LIGHTEN
+		material.albedo_color.b += LIGHTEN
+		i+=1
 	pass

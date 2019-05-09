@@ -9,7 +9,7 @@ func _ready():
     pass
 
 func on_hitbox_enter(body):
-    if globals.player.is_main_attacking and body.has_method("damage"):
+    if body.has_method("damage"):
         body.damage(weapon.DAMAGE)
     pass
 
