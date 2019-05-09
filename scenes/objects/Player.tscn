@@ -110,10 +110,10 @@ background_mode = 1
 ambient_light_color = Color( 1, 1, 1, 1 )
 ambient_light_energy = 0.01
 
-[sub_resource type="BoxShape" id=24]
+[sub_resource type="BoxShape" id=14]
 extents = Vector3( 0.5, 2.2, 0.5 )
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=15]
 length = 0.9
 step = 0.05
 tracks/0/type = "transform"
@@ -171,7 +171,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=16]
 length = 2.0
 loop = true
 tracks/0/type = "transform"
@@ -206,7 +206,7 @@ tracks/2/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( -5.361, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 5.361, 0, 0 ), Vector3( 0, 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=17]
 length = 0.8
 loop = true
 tracks/0/type = "transform"
@@ -241,7 +241,7 @@ tracks/2/keys = {
 "values": [ Vector3( 9, 0, 0 ), Vector3( 8.96547, 0.790867, 5.062 ), Vector3( 9, 0, 0 ), Vector3( 8.96547, -0.790867, -5.062 ), Vector3( 9, 0, 0 ), Vector3( 8.96547, 0.790867, 5.062 ), Vector3( 9, 0, 0 ), Vector3( 8.96547, -0.790867, -5.062 ), Vector3( 9, 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=18]
 loop = true
 tracks/0/type = "transform"
 tracks/0/path = NodePath(".")
@@ -275,30 +275,30 @@ tracks/2/keys = {
 "values": [ Vector3( 20, 0, 0 ), Vector3( -50, 0, 0 ), Vector3( 20, 0, 0 ) ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=18]
+[sub_resource type="AnimationNodeAnimation" id=19]
 animation = "idle"
 
-[sub_resource type="AnimationNodeBlend2" id=19]
+[sub_resource type="AnimationNodeBlend2" id=20]
 
-[sub_resource type="AnimationNodeAnimation" id=20]
+[sub_resource type="AnimationNodeAnimation" id=21]
 animation = "jump_mid"
 
-[sub_resource type="AnimationNodeBlend2" id=21]
+[sub_resource type="AnimationNodeBlend2" id=22]
 
-[sub_resource type="AnimationNodeAnimation" id=22]
+[sub_resource type="AnimationNodeAnimation" id=23]
 animation = "walk"
 
-[sub_resource type="AnimationNodeBlendTree" id=23]
+[sub_resource type="AnimationNodeBlendTree" id=24]
 graph_offset = Vector2( -33.4864, 133.721 )
-nodes/Idle/node = SubResource( 18 )
+nodes/Idle/node = SubResource( 19 )
 nodes/Idle/position = Vector2( 160, 140 )
-nodes/IdleWalkBlend/node = SubResource( 19 )
+nodes/IdleWalkBlend/node = SubResource( 20 )
 nodes/IdleWalkBlend/position = Vector2( 480, 140 )
-"nodes/Jump Mid/node" = SubResource( 20 )
+"nodes/Jump Mid/node" = SubResource( 21 )
 "nodes/Jump Mid/position" = Vector2( 160, 380 )
-nodes/JumpBlend/node = SubResource( 21 )
+nodes/JumpBlend/node = SubResource( 22 )
 nodes/JumpBlend/position = Vector2( 760, 140 )
-nodes/Walk/node = SubResource( 22 )
+nodes/Walk/node = SubResource( 23 )
 nodes/Walk/position = Vector2( 160, 260 )
 nodes/output/position = Vector2( 1020, 140 )
 node_connections = [ "output", 0, "JumpBlend", "IdleWalkBlend", 0, "Idle", "IdleWalkBlend", 1, "Walk", "JumpBlend", 0, "IdleWalkBlend", "JumpBlend", 1, "Jump Mid" ]
@@ -308,6 +308,7 @@ collision_mask = 6
 mode = 2
 physics_material_override = SubResource( 1 )
 script = ExtResource( 1 )
+JUMP_POWER = 15
 
 [node name="HUD" type="Node" parent="."]
 
@@ -454,17 +455,17 @@ script = ExtResource( 13 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Camera/WeaponContainer/Weapon/Hitbox"]
 transform = Transform( 1, 0, -9.31323e-10, 2.98023e-08, 0.999999, -9.31323e-10, -9.31323e-10, 0, 0.999999, 0, 0, 0 )
-shape = SubResource( 24 )
+shape = SubResource( 14 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera/WeaponContainer"]
-anims/attack1 = SubResource( 14 )
-anims/idle = SubResource( 15 )
-anims/jump_mid = SubResource( 16 )
-anims/walk = SubResource( 17 )
+anims/attack1 = SubResource( 15 )
+anims/idle = SubResource( 16 )
+anims/jump_mid = SubResource( 17 )
+anims/walk = SubResource( 18 )
 blend_times = [ "jump", "jump_mid", 0.5 ]
 
 [node name="AnimationTree" type="AnimationTree" parent="Camera/WeaponContainer"]
-tree_root = SubResource( 23 )
+tree_root = SubResource( 24 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/IdleWalkBlend/blend_amount = 1.0
 parameters/JumpBlend/blend_amount = 0.0

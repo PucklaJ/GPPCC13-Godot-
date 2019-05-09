@@ -1134,4 +1134,4 @@ main_attack={
 [physics]
 
 3d/physics_engine="GodotPhysics"
-3d/default_gravity=13.0
+3d/default_gravity=25.0
