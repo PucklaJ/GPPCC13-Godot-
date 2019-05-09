@@ -8,13 +8,15 @@ export var MAX_HEALTH = 5.0
 
 var camera
 var is_grounded
+var is_main_attacking
 var health
 
 func _ready():
     globals.player = self
 
     camera = get_node("Camera")
-    health = 2.0
+    health = MAX_HEALTH
+    is_main_attacking = false
     pass
 
 func _physics_process(delta):
@@ -55,6 +57,9 @@ func process_buttons(delta):
 
     if is_grounded && Input.is_action_just_pressed("jump"):
         apply_central_impulse(Vector3(0,JUMP_POWER,0))
+    
+    if !is_main_attacking and Input.is_action_just_pressed("main_attack"):
+        is_main_attacking = true
 
     pass
 

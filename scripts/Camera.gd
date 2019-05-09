@@ -32,24 +32,36 @@ func _input(event):
 
 func _process(delta):
     if mouse_motion_processed:
-        var axis_value_y = Input.get_joy_axis(JOY_DEVICE,JOY_AXIS_VERTICAL)
-        var axis_value_x = Input.get_joy_axis(JOY_DEVICE,JOY_AXIS_HORIZONTAL)
-        if abs(axis_value_x) > AXIS_DEADZONE:
-            mouse_motion_x = axis_value_x * AXIS_SENSITIVITY_X
-            mouse_motion_processed = false
-        if abs(axis_value_y) > AXIS_DEADZONE:
-            mouse_motion_y = axis_value_y * AXIS_SENSITIVITY_Y
-            mouse_motion_processed = false
+        read_axis_values()
 
     if !mouse_motion_processed:
-        rotate(Vector3(0,1,0),-mouse_motion_x*MOUSE_SENSETIVITY_X)
-        if rotation.x - mouse_motion_y*MOUSE_SENSETIVITY_Y < PI/2  and rotation.x - mouse_motion_y*MOUSE_SENSETIVITY_Y > -PI/2:
-            rotate(get_right(),-mouse_motion_y*MOUSE_SENSETIVITY_Y)
-        rotation.z = 0
-        mouse_motion_x = 0
-        mouse_motion_y = 0
-        mouse_motion_processed = true
+        process_mouse_motion()
     pass
+
+func read_axis_values():
+    if not Input.get_connected_joypads().has(0):
+        return
+    var axis_value_y = Input.get_joy_axis(JOY_DEVICE,JOY_AXIS_VERTICAL)
+    var axis_value_x = Input.get_joy_axis(JOY_DEVICE,JOY_AXIS_HORIZONTAL)
+    if abs(axis_value_x) > AXIS_DEADZONE:
+        mouse_motion_x = axis_value_x * AXIS_SENSITIVITY_X
+        mouse_motion_processed = false
+    if abs(axis_value_y) > AXIS_DEADZONE:
+        mouse_motion_y = axis_value_y * AXIS_SENSITIVITY_Y
+        mouse_motion_processed = false
+    pass
+
+func process_mouse_motion():
+    rotate(Vector3(0,1,0),-mouse_motion_x*MOUSE_SENSETIVITY_X)
+    if rotation.x - mouse_motion_y*MOUSE_SENSETIVITY_Y < PI/2  and rotation.x - mouse_motion_y*MOUSE_SENSETIVITY_Y > -PI/2:
+        rotate(get_right(),-mouse_motion_y*MOUSE_SENSETIVITY_Y)
+    rotation.z = 0
+    mouse_motion_x = 0
+    mouse_motion_y = 0
+    mouse_motion_processed = true
+    pass
+
+
 
 func get_right():
     var forward = get_global_transform().basis.z

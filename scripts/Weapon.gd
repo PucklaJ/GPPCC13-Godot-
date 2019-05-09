@@ -4,6 +4,21 @@ export var LIGHTEN = 0.5
 
 onready var anim = get_child(0)
 onready var player = get_parent().get_parent()
+onready var anim_tree = get_node("AnimationTree")
+
+const BLEND_AMOUNT1 = "parameters/IdleWalkBlend/blend_amount"
+const BLEND_AMOUNT2 = "parameters/JumpBlend/blend_amount"
+const BLEND_IDLE_SPEED = 3.0
+const BLEND_WALK_SPEED = 5.0
+const BLEND_JUMP_SPEED = 3.0
+
+func attack_main_unlock():
+	player.is_main_attacking = false
+	pass
+
+func attack_main_finished():
+	anim_tree.active = true
+	pass
 
 func _ready():
 	var i = 0
@@ -16,24 +31,23 @@ func _ready():
 		material.albedo_color.g += LIGHTEN
 		material.albedo_color.b += LIGHTEN
 		i+=1
-
-	anim.play("idle")
 	pass
 
-var needs_jump = true
-
 func _process(delta):
+	if player.is_main_attacking:
+		if not anim.current_animation.begins_with("attack"):
+			anim.play("attack1")
+		anim_tree.active = false
+	
 	if player.is_grounded:
 		var vel = player.linear_velocity
 		vel.y = 0
 		if vel.length_squared() > 0.1:
-			anim.play("walk")
+			anim_tree.set(BLEND_AMOUNT1,min(anim_tree.get(BLEND_AMOUNT1)+BLEND_IDLE_SPEED*delta,1.0))
 		else:
-			anim.play("idle")
-		needs_jump = true
+			anim_tree.set(BLEND_AMOUNT1,max(anim_tree.get(BLEND_AMOUNT1)-BLEND_WALK_SPEED*delta,0.0))
+		anim_tree.set(BLEND_AMOUNT2,max(anim_tree.get(BLEND_AMOUNT2)-BLEND_JUMP_SPEED*delta,0.0))
 	else:
-		if needs_jump:
-			anim.play("jump")
-			needs_jump = false
+		anim_tree.set(BLEND_AMOUNT2,min(anim_tree.get(BLEND_AMOUNT2)+BLEND_JUMP_SPEED*delta,1.0))
 	
 	pass

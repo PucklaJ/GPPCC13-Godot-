@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://models/weapons/Sword.obj" type="ArrayMesh" id=2]
@@ -74,7 +74,58 @@ ambient_light_color = Color( 1, 1, 1, 1 )
 ambient_light_energy = 0.01
 
 [sub_resource type="Animation" id=11]
-resource_name = "idle"
+resource_name = "attack1"
+length = 0.9
+tracks/0/type = "transform"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = PoolRealArray(  )
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:translation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0.743309, -0.777437, -1.05639 ), Vector3( 1.04812, -0.167925, -0.345378 ), Vector3( -0.61484, -0.714067, -1.65862 ), Vector3( 0.743, -0.777, -1.056 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, -90, 0 ), Vector3( -54.8436, -90, 3.55606e-06 ), Vector3( -82.2428, 17.0537, 56.6815 ), Vector3( 0, -90, 0 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_main_unlock"
+}, {
+"args": [  ],
+"method": "attack_main_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=12]
 length = 2.0
 loop = true
 tracks/0/type = "transform"
@@ -109,43 +160,7 @@ tracks/2/keys = {
 "values": [ Vector3( 0, -90, 0 ), Vector3( -5.361, -90, 0 ), Vector3( 0, -90, 0 ), Vector3( 5.361, -90, 0 ), Vector3( 0, -90, 0 ) ]
 }
 
-[sub_resource type="Animation" id=12]
-resource_name = "jump"
-length = 0.5
-tracks/0/type = "transform"
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = PoolRealArray(  )
-tracks/1/type = "value"
-tracks/1/path = NodePath(".:translation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0.743128, -0.920224, -1.05616 ), Vector3( 0.743, 0, -1.056 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:rotation_degrees")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, -90, 0 ), Vector3( 0, -90, -20 ) ]
-}
-
-[sub_resource type="Animation" id=13]
-resource_name = "jump_mid"
+[sub_resource type="Animation" id=14]
 length = 0.8
 loop = true
 tracks/0/type = "transform"
@@ -180,7 +195,7 @@ tracks/2/keys = {
 "values": [ Vector3( 0, -90, -20 ), Vector3( -2.5, -90, -20 ), Vector3( 0, -90, -20 ), Vector3( 2.5, -90, -20 ), Vector3( 0, -90, -20 ), Vector3( -2.5, -90, -20 ), Vector3( 0, -90, -20 ), Vector3( 2.5, -90, -20 ), Vector3( 0, -90, -20 ) ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=15]
 loop = true
 tracks/0/type = "transform"
 tracks/0/path = NodePath(".")
@@ -213,6 +228,34 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector3( 0, -90, -20 ), Vector3( 0, -90, 50 ), Vector3( 0, -90, -20 ) ]
 }
+
+[sub_resource type="AnimationNodeAnimation" id=17]
+animation = "idle"
+
+[sub_resource type="AnimationNodeBlend2" id=18]
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "jump_mid"
+
+[sub_resource type="AnimationNodeBlend2" id=20]
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "walk"
+
+[sub_resource type="AnimationNodeBlendTree" id=19]
+graph_offset = Vector2( -33.4864, 93.9518 )
+nodes/Idle/node = SubResource( 17 )
+nodes/Idle/position = Vector2( 160, 140 )
+nodes/IdleWalkBlend/node = SubResource( 18 )
+nodes/IdleWalkBlend/position = Vector2( 480, 140 )
+"nodes/Jump Mid/node" = SubResource( 21 )
+"nodes/Jump Mid/position" = Vector2( 160, 380 )
+nodes/JumpBlend/node = SubResource( 20 )
+nodes/JumpBlend/position = Vector2( 760, 140 )
+nodes/Walk/node = SubResource( 16 )
+nodes/Walk/position = Vector2( 160, 260 )
+nodes/output/position = Vector2( 1020, 140 )
+node_connections = [ "output", 0, "JumpBlend", "JumpBlend", 0, "IdleWalkBlend", "JumpBlend", 1, "Jump Mid", "IdleWalkBlend", 0, "Idle", "IdleWalkBlend", 1, "Walk" ]
 
 [node name="Player" type="RigidBody"]
 mode = 2
@@ -327,7 +370,7 @@ AXIS_SENSITIVITY_X = 25.0
 AXIS_SENSITIVITY_Y = 25.0
 
 [node name="Weapon" type="MeshInstance" parent="Camera"]
-transform = Transform( -2.05376e-08, -7.47509e-09, -0.5, -0.17101, 0.469846, 0, 0.469846, 0.17101, -2.18557e-08, 0.743, 0, -1.056 )
+transform = Transform( -1.6963e-08, 1.3776e-08, -0.499912, 0.315159, 0.388068, 0, 0.388068, -0.315159, -2.18519e-08, 0.743034, -0.98735, -1.05604 )
 mesh = ExtResource( 2 )
 material/0 = null
 material/1 = null
@@ -338,9 +381,15 @@ script = ExtResource( 3 )
 LIGHTEN = 0.3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera/Weapon"]
-anims/idle = SubResource( 11 )
-anims/jump = SubResource( 12 )
-anims/jump_mid = SubResource( 13 )
-anims/walk = SubResource( 14 )
-next/jump = "jump_mid"
+anims/attack1 = SubResource( 11 )
+anims/idle = SubResource( 12 )
+anims/jump_mid = SubResource( 14 )
+anims/walk = SubResource( 15 )
 blend_times = [ "jump", "jump_mid", 0.5 ]
+
+[node name="AnimationTree" type="AnimationTree" parent="Camera/Weapon"]
+tree_root = SubResource( 19 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/IdleWalkBlend/blend_amount = 1.0
+parameters/JumpBlend/blend_amount = 0.0
