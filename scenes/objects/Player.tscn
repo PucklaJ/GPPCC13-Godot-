@@ -68,12 +68,12 @@ func new_collected_coin():
 
 [sub_resource type="CapsuleShape" id=9]
 
-[sub_resource type="Environment" id=11]
+[sub_resource type="Environment" id=10]
 background_mode = 1
 ambient_light_color = Color( 1, 1, 1, 1 )
 ambient_light_energy = 0.01
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=11]
 resource_name = "idle"
 length = 2.0
 loop = true
@@ -109,7 +109,7 @@ tracks/2/keys = {
 "values": [ Vector3( 0, -90, 0 ), Vector3( -5.361, -90, 0 ), Vector3( 0, -90, 0 ), Vector3( 5.361, -90, 0 ), Vector3( 0, -90, 0 ) ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=12]
 resource_name = "jump"
 length = 0.5
 tracks/0/type = "transform"
@@ -144,7 +144,7 @@ tracks/2/keys = {
 "values": [ Vector3( 0, -90, 0 ), Vector3( 0, -90, -20 ) ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=13]
 resource_name = "jump_mid"
 length = 0.8
 loop = true
@@ -180,8 +180,7 @@ tracks/2/keys = {
 "values": [ Vector3( 0, -90, -20 ), Vector3( -2.5, -90, -20 ), Vector3( 0, -90, -20 ), Vector3( 2.5, -90, -20 ), Vector3( 0, -90, -20 ), Vector3( -2.5, -90, -20 ), Vector3( 0, -90, -20 ), Vector3( 2.5, -90, -20 ), Vector3( 0, -90, -20 ) ]
 }
 
-[sub_resource type="Animation" id=12]
-resource_name = "walk"
+[sub_resource type="Animation" id=14]
 loop = true
 tracks/0/type = "transform"
 tracks/0/path = NodePath(".")
@@ -321,9 +320,11 @@ shape = SubResource( 9 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.52855, 0 )
-environment = SubResource( 11 )
+environment = SubResource( 10 )
 current = true
 script = ExtResource( 4 )
+AXIS_SENSITIVITY_X = 25.0
+AXIS_SENSITIVITY_Y = 25.0
 
 [node name="Weapon" type="MeshInstance" parent="Camera"]
 transform = Transform( -2.05376e-08, -7.47509e-09, -0.5, -0.17101, 0.469846, 0, 0.469846, 0.17101, -2.18557e-08, 0.743, 0, -1.056 )
@@ -337,9 +338,9 @@ script = ExtResource( 3 )
 LIGHTEN = 0.3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera/Weapon"]
-anims/idle = SubResource( 13 )
-anims/jump = SubResource( 14 )
-anims/jump_mid = SubResource( 15 )
-anims/walk = SubResource( 12 )
+anims/idle = SubResource( 11 )
+anims/jump = SubResource( 12 )
+anims/jump_mid = SubResource( 13 )
+anims/walk = SubResource( 14 )
 next/jump = "jump_mid"
 blend_times = [ "jump", "jump_mid", 0.5 ]
