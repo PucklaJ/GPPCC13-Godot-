@@ -1,6 +1,7 @@
 extends MeshInstance
 
 export var LIGHTEN = 0.5
+export var DAMAGE = 1.0
 
 onready var anim = get_child(0)
 onready var player = get_parent().get_parent()
@@ -12,6 +13,8 @@ const BLEND_IDLE_SPEED = 3.0
 const BLEND_WALK_SPEED = 5.0
 const BLEND_JUMP_SPEED = 3.0
 
+var attack_animations = PoolStringArray()
+
 func attack_main_unlock():
 	player.is_main_attacking = false
 	pass
@@ -21,6 +24,8 @@ func attack_main_finished():
 	pass
 
 func _ready():
+	anim_tree.active = true
+
 	var i = 0
 	while i<mesh.get_surface_count():
 		var material = mesh.surface_get_material(i)
@@ -31,12 +36,16 @@ func _ready():
 		material.albedo_color.g += LIGHTEN
 		material.albedo_color.b += LIGHTEN
 		i+=1
+
+	for animation in anim.get_animation_list():
+		if animation.begins_with("attack"):
+			attack_animations.append(animation)
 	pass
 
 func _process(delta):
 	if player.is_main_attacking:
 		if not anim.current_animation.begins_with("attack"):
-			anim.play("attack1")
+			play_attack_animation()
 		anim_tree.active = false
 	
 	if player.is_grounded:
@@ -54,4 +63,8 @@ func _process(delta):
 
 func blend_anim(blend_amount,speed):
 	anim_tree.set(blend_amount,clamp(anim_tree.get(blend_amount)+speed,0.0,1.0))
+	pass
+
+func play_attack_animation():
+	anim.play(attack_animations[floor(rand_range(0,attack_animations.size()))])
 	pass

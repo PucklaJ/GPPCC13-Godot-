@@ -8,3 +8,7 @@ func _physics_process(delta):
     linear_velocity = forward * MOVE_SPEED
     linear_velocity.y = y
     pass
+
+func damage(amount):
+    queue_free()
+    pass
