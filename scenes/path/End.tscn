@@ -25,7 +25,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="Back"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 11
 
 [node name="CollisionShape" type="CollisionShape" parent="Back/StaticBody"]
 shape = SubResource( 2 )

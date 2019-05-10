@@ -27,7 +27,7 @@ material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Right"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 11
 
 [node name="CollisionShape" type="CollisionShape" parent="Right/StaticBody"]
 shape = SubResource( 2 )
@@ -39,7 +39,7 @@ material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Top"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 11
 
 [node name="CollisionShape" type="CollisionShape" parent="Top/StaticBody"]
 shape = SubResource( 3 )
@@ -51,7 +51,7 @@ material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Left"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 11
 
 [node name="CollisionShape" type="CollisionShape" parent="Left/StaticBody"]
 shape = SubResource( 4 )
@@ -63,7 +63,7 @@ material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="Bottom"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 11
 
 [node name="CollisionShape" type="CollisionShape" parent="Bottom/StaticBody"]
 shape = SubResource( 5 )

@@ -450,7 +450,7 @@ LIGHTEN = 0.0
 
 [node name="Hitbox" type="Area" parent="Camera/WeaponContainer/Weapon"]
 monitoring = false
-collision_mask = 2
+collision_mask = 1048574
 script = ExtResource( 13 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Camera/WeaponContainer/Weapon/Hitbox"]
@@ -469,3 +469,6 @@ tree_root = SubResource( 24 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/IdleWalkBlend/blend_amount = 1.0
 parameters/JumpBlend/blend_amount = 0.0
+
+[node name="ShootPosition" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6875, 0 )

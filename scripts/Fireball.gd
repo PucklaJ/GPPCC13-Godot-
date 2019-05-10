@@ -1,0 +1,34 @@
+extends Spatial
+
+export var SPEED = 100
+export var DAMAGE = 1
+
+onready var hitbox = get_node("Mesh/Hitbox")
+
+var direction = Vector3(0,0,0)
+var shoot_pos = Vector3(0,0,0)
+
+func set_direction():
+    shoot_pos = globals.player.get_node("ShootPosition").get_global_transform().origin
+    direction = (shoot_pos - get_global_transform().origin).normalized()
+    hitbox.connect("body_entered",self,"on_body_enter")
+    pass
+
+func _process(delta):
+    hitbox.set_monitoring(true)
+    hitbox.set_monitorable(true)
+    translation += direction * SPEED * delta
+    pass
+
+func on_body_enter(body):
+    if body == globals.player:
+        globals.player.damage(DAMAGE,shoot_pos - get_global_transform().origin)
+        die()
+    elif body.get_collision_layer_bit(2):
+        die()
+        pass
+    pass
+
+func die():
+    globals.return_fireball(self)
+    pass

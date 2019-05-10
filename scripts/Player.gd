@@ -63,6 +63,10 @@ func process_buttons(delta):
 
     pass
 
+func damage(amount,direction):
+    health -= amount
+    pass
+
 func get_forward():
     var cam_forward = camera.get_global_transform().basis.z
     return Vector3(cam_forward.x,0,cam_forward.z).normalized()
