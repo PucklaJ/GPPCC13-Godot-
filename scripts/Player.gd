@@ -17,6 +17,8 @@ func _ready():
     camera = get_node("Camera")
     health = MAX_HEALTH
     is_main_attacking = false
+    get_node("Camera").rotation = rotation
+    rotation = Vector3(0,0,0)
     pass
 
 func _physics_process(delta):
@@ -64,8 +66,8 @@ func process_buttons(delta):
     pass
 
 func damage(amount,direction):
-    health -= amount
-    if health <= 0.0:
+    health = clamp(health-amount,0.0,MAX_HEALTH)
+    if health == 0.0:
         die()
     pass
 
@@ -76,7 +78,6 @@ func remove_all_children(parent):
     pass
 
 func die():
-    globals.reset()
     pass
 
 func get_forward():

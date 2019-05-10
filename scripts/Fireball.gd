@@ -11,6 +11,8 @@ var shoot_pos = Vector3(0,0,0)
 func set_direction():
     shoot_pos = globals.player.get_node("ShootPosition").get_global_transform().origin
     direction = (shoot_pos - get_global_transform().origin).normalized()
+    hitbox.set_collision_mask_bit(0,true)    
+    hitbox.set_collision_mask_bit(1,false)    
     hitbox.connect("body_entered",self,"on_body_enter")
     pass
 
@@ -23,8 +25,9 @@ func _process(delta):
 func on_body_enter(body):
     if body == globals.player:
         globals.player.damage(DAMAGE,shoot_pos - get_global_transform().origin)
-        die()
-    elif body.get_collision_layer_bit(2):
+    elif body.get_collision_layer_bit(1):
+        body.damage(DAMAGE,body.get_node("ShootPosition").get_global_transform().origin - get_global_transform().origin)
+    if not body.get_collision_layer_bit(4):
         die()
         pass
     pass

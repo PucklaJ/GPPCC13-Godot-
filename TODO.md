@@ -8,5 +8,4 @@
     - Skeleton_Die
 + More paths
     - big area
-+ Attack of skeleton
 + Other enemies

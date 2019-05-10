@@ -20,6 +20,9 @@ func _ready():
 func _input(event):
     if Input.is_action_just_pressed("toggle_fullscreen"):
         OS.window_fullscreen = !OS.window_fullscreen
+    elif Input.is_action_just_pressed("close_game"):
+        get_tree().quit()
+        
     pass
 
 func set_coins(new_value):
@@ -52,4 +55,5 @@ func reset():
             ball.visible = false
             ball.get_parent().remove_child(ball)
     coins = 0
+    player.health = player.MAX_HEALTH
     pass

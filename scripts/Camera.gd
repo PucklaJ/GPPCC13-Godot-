@@ -56,6 +56,7 @@ func read_axis_values():
     pass
 
 func process_mouse_motion():
+    print(rotation.x)
     rotate(Vector3(0,1,0),-mouse_motion_x*MOUSE_SENSETIVITY_X)
     if rotation.x - mouse_motion_y*MOUSE_SENSETIVITY_Y < PI/2  and rotation.x - mouse_motion_y*MOUSE_SENSETIVITY_Y > -PI/2:
         rotate(get_right(),-mouse_motion_y*MOUSE_SENSETIVITY_Y)

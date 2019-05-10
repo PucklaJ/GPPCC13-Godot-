@@ -109,8 +109,11 @@ rings = 8
 [sub_resource type="GDScript" id=4]
 script/source = "extends Area
 
-func damage(amount):
-	get_parent().get_parent().die()
+func damage(amount,direction):
+	var ball = get_parent().get_parent()
+	ball.direction = -globals.player.get_node(\"Camera\").get_global_transform().basis.z
+	set_collision_mask_bit(0,false)
+	set_collision_mask_bit(1,true)
 	pass"
 
 [sub_resource type="SphereShape" id=7]

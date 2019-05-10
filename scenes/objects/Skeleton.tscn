@@ -50,7 +50,7 @@ wait_time = 0.5
 autostart = true
 
 [node name="ShootPosition" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.28898, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.48081, 0 )
 
 [node name="AI distance" type="Area" parent="."]
 input_ray_pickable = false

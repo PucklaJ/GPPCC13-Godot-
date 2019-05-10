@@ -1,6 +1,7 @@
 extends Area
 
 onready var weapon = get_parent()
+onready var camera = weapon.get_parent().get_parent()
 onready var collision_shape = get_child(0)
 
 func _ready():
@@ -10,7 +11,7 @@ func _ready():
 
 func on_hitbox_enter(body):
     if body.has_method("damage"):
-        body.damage(weapon.DAMAGE)
+        body.damage(weapon.DAMAGE,body.get_global_transform().origin - camera.get_global_transform().origin)
     pass
 
 func set_hitbox_shape():
