@@ -65,6 +65,18 @@ func process_buttons(delta):
 
 func damage(amount,direction):
     health -= amount
+    if health <= 0.0:
+        die()
+    pass
+
+func remove_all_children(parent):
+    for c in parent.get_children():
+        remove_all_children(c)
+        parent.remove_child(c)
+    pass
+
+func die():
+    globals.reset()
     pass
 
 func get_forward():

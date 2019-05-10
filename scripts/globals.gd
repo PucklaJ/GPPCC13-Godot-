@@ -1,6 +1,6 @@
 extends Node
 
-export var FIREBALL_OBJECT_POOL_SIZE = 10
+export var FIREBALL_OBJECT_POOL_SIZE = 50
 
 var player
 var coins = 0 setget set_coins
@@ -24,7 +24,8 @@ func _input(event):
 
 func set_coins(new_value):
     coins = new_value
-    player.get_node("HUD/CollectedCoins").new_collected_coin()
+    if new_value != 0:
+        player.get_node("HUD/CollectedCoins").new_collected_coin()
     pass
 
 func get_fireball():
@@ -42,4 +43,13 @@ func get_fireball():
 func return_fireball(ball):
     ball.visible = false
     get_parent().remove_child(ball)
+    pass
+
+func reset():
+    for i in range(fireball_object_pool.size()):
+        var ball = fireball_object_pool[i]
+        if ball.get_parent() != null:
+            ball.visible = false
+            ball.get_parent().remove_child(ball)
+    coins = 0
     pass
