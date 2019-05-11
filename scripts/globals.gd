@@ -4,10 +4,10 @@ export var FIREBALL_OBJECT_POOL_SIZE = 50
 
 var player
 var coins = 0 setget set_coins
-onready var collected_coin_distance_curve = load("res://misc/CollectedCoinDistance.tres")
 onready var FIREBALL = load("res://scenes/objects/Fireball.tscn")
 
 var fireball_object_pool = Array()
+var restart = false
 
 func _ready():
     for i in range(FIREBALL_OBJECT_POOL_SIZE):
@@ -23,6 +23,16 @@ func _input(event):
     elif Input.is_action_just_pressed("close_game"):
         get_tree().quit()
         
+    pass
+
+func _process(delta):
+    if restart:
+        coins = 0
+        for f in fireball_object_pool:
+            return_fireball(f)
+        Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+        get_tree().change_scene("res://scenes/menus/StartMenu.tscn")
+        restart = false
     pass
 
 func set_coins(new_value):
@@ -45,7 +55,8 @@ func get_fireball():
 
 func return_fireball(ball):
     ball.visible = false
-    get_parent().remove_child(ball)
+    if ball.get_parent() != null:
+        ball.get_parent().remove_child(ball)
     pass
 
 func reset():

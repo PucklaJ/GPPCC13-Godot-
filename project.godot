@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="GPPCC13"
-run/main_scene="res://scenes/levels/Level 1.tscn"
+run/main_scene="res://scenes/menus/StartMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -1149,5 +1149,6 @@ quality/reflections/high_quality_ggx=false
 quality/subsurface_scattering/quality=0
 quality/subsurface_scattering/weight_samples=false
 quality/voxel_cone_tracing/high_quality=false
+environment/default_clear_color=Color( 0, 0, 0, 1 )
 quality/filters/msaa=2
 quality/depth/hdr=false

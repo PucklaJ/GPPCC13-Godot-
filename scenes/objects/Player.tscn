@@ -301,7 +301,7 @@ nodes/JumpBlend/position = Vector2( 760, 140 )
 nodes/Walk/node = SubResource( 23 )
 nodes/Walk/position = Vector2( 160, 260 )
 nodes/output/position = Vector2( 1020, 140 )
-node_connections = [ "output", 0, "JumpBlend", "IdleWalkBlend", 0, "Idle", "IdleWalkBlend", 1, "Walk", "JumpBlend", 0, "IdleWalkBlend", "JumpBlend", 1, "Jump Mid" ]
+node_connections = [ "output", 0, "JumpBlend", "JumpBlend", 0, "IdleWalkBlend", "JumpBlend", 1, "Jump Mid", "IdleWalkBlend", 0, "Idle", "IdleWalkBlend", 1, "Walk" ]
 
 [node name="Player" type="RigidBody"]
 collision_mask = 6

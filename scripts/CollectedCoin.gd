@@ -11,6 +11,7 @@ var MAX_DISTANCE
 
 onready var coin_symbol = get_node("../../Coins/HBoxContainer/CoinSymbol")
 onready var wsize = OS.get_real_window_size()
+onready var collected_coin_distance_curve = load("res://misc/CollectedCoinDistance.tres")
 
 func _ready():
     dest = coin_symbol.rect_global_position + coin_symbol.rect_size/2
@@ -31,7 +32,7 @@ func _process(delta):
 func move_and_die(delta):
     time += delta
 
-    var dist_val = globals.collected_coin_distance_curve.interpolate(time/MOVE_TIME)
+    var dist_val = collected_coin_distance_curve.interpolate(time/MOVE_TIME)
     position = wsize/2+direction*MAX_DISTANCE*dist_val
     if time  > MOVE_TIME:
         is_collecting = false

@@ -1,0 +1,98 @@
+[gd_scene load_steps=5 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+func _process(delta):
+	position = OS.get_real_window_size()/2
+	pass"
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends VBoxContainer
+
+func _ready():
+	rect_position = rect_size/-2
+	pass"
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Button
+
+export var level = \"Level 2\"
+
+func _ready():
+	grab_focus()
+	connect(\"button_down\",self,\"on_button_down\")
+	pass
+	
+func on_button_down():
+	get_tree().change_scene(\"res://scenes/levels/\"+level+\".tscn\")
+	pass"
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends Button
+
+func _ready():
+	connect(\"button_down\",get_tree(),\"quit\")
+	pass"
+
+[node name="StartMenu" type="Node2D"]
+position = Vector2( 640, 360 )
+script = SubResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -50.0
+margin_top = -300.0
+margin_right = 50.0
+margin_bottom = -200.0
+text = "GPPCC13"
+align = 1
+valign = 1
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+margin_left = -100.0
+margin_top = -80.0
+margin_right = 100.0
+margin_bottom = 78.0
+custom_constants/separation = 50
+script = SubResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StartButton" type="Button" parent="Buttons"]
+margin_right = 200.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 200, 50 )
+focus_neighbour_top = NodePath("../ExitButton")
+focus_neighbour_bottom = NodePath("../OptionsButton")
+focus_next = NodePath("../OptionsButton")
+focus_previous = NodePath("../ExitButton")
+shortcut_in_tooltip = false
+text = "Start"
+script = SubResource( 3 )
+level = "Level 1"
+
+[node name="OptionsButton" type="Button" parent="Buttons"]
+margin_top = 100.0
+margin_right = 200.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 200, 50 )
+focus_neighbour_top = NodePath("../StartButton")
+focus_neighbour_bottom = NodePath("../ExitButton")
+focus_next = NodePath("../ExitButton")
+focus_previous = NodePath("../StartButton")
+shortcut_in_tooltip = false
+text = "Options"
+
+[node name="ExitButton" type="Button" parent="Buttons"]
+margin_top = 200.0
+margin_right = 200.0
+margin_bottom = 250.0
+rect_min_size = Vector2( 200, 50 )
+focus_neighbour_top = NodePath("../OptionsButton")
+focus_neighbour_bottom = NodePath("../StartButton")
+focus_next = NodePath("../StartButton")
+focus_previous = NodePath("../OptionsButton")
+shortcut_in_tooltip = false
+text = "Exit"
+script = SubResource( 4 )

@@ -23,6 +23,8 @@ func _ready():
 
 func _physics_process(delta):
     process_buttons(delta)
+    if Input.is_key_pressed(KEY_R):
+        die()
     pass
 
 func process_buttons(delta):
@@ -78,6 +80,7 @@ func remove_all_children(parent):
     pass
 
 func die():
+    globals.restart = true
     pass
 
 func get_forward():
