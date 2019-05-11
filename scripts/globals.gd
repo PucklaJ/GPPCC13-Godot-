@@ -26,9 +26,15 @@ func _input(event):
     pass
 
 func _process(delta):
+    for f in fireball_object_pool:
+        if not f.visible and f.get_parent() != null:
+            f.get_parent().remove_child(f)
+
     if restart:
         coins = 0
         for f in fireball_object_pool:
+            if f.get_parent() != null:
+                f.get_parent().remove_child(f)
             return_fireball(f)
         Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
         get_tree().change_scene("res://scenes/menus/StartMenu.tscn")
@@ -55,16 +61,4 @@ func get_fireball():
 
 func return_fireball(ball):
     ball.visible = false
-    if ball.get_parent() != null:
-        ball.get_parent().remove_child(ball)
-    pass
-
-func reset():
-    for i in range(fireball_object_pool.size()):
-        var ball = fireball_object_pool[i]
-        if ball.get_parent() != null:
-            ball.visible = false
-            ball.get_parent().remove_child(ball)
-    coins = 0
-    player.health = player.MAX_HEALTH
     pass

@@ -3,26 +3,26 @@
 [ext_resource path="res://scripts/Fireball.gd" type="Script" id=1]
 [ext_resource path="res://misc/FireballGradientTexture.tres" type="Texture" id=2]
 
-[sub_resource type="VisualShaderNodeTextureUniform" id=11]
+[sub_resource type="VisualShaderNodeTextureUniform" id=1]
 uniform_name = "Gradient"
 texture_type = 1
 
-[sub_resource type="VisualShaderNodeInput" id=12]
+[sub_resource type="VisualShaderNodeInput" id=2]
 input_name = "time"
 
-[sub_resource type="VisualShaderNodeScalarOp" id=13]
+[sub_resource type="VisualShaderNodeScalarOp" id=3]
 default_input_values = [ 0, 0.0, 1, 1.0 ]
 operator = 4
 
-[sub_resource type="VisualShaderNodeVectorCompose" id=14]
+[sub_resource type="VisualShaderNodeVectorCompose" id=4]
 
-[sub_resource type="VisualShaderNodeScalarUniform" id=15]
+[sub_resource type="VisualShaderNodeScalarUniform" id=5]
 uniform_name = "Speed"
 
-[sub_resource type="VisualShaderNodeScalarOp" id=16]
+[sub_resource type="VisualShaderNodeScalarOp" id=6]
 operator = 2
 
-[sub_resource type="VisualShader" id=9]
+[sub_resource type="VisualShader" id=7]
 code = "shader_type spatial;
 render_mode unshaded, shadows_disabled;
 
@@ -82,31 +82,31 @@ void light() {
 graph_offset = Vector2( -823.901, 0 )
 flags/shadows_disabled = true
 flags/unshaded = true
-nodes/fragment/3/node = SubResource( 11 )
+nodes/fragment/3/node = SubResource( 1 )
 nodes/fragment/3/position = Vector2( 160, 140 )
-nodes/fragment/5/node = SubResource( 12 )
+nodes/fragment/5/node = SubResource( 2 )
 nodes/fragment/5/position = Vector2( -760, 160 )
-nodes/fragment/6/node = SubResource( 13 )
+nodes/fragment/6/node = SubResource( 3 )
 nodes/fragment/6/position = Vector2( -300, 160 )
-nodes/fragment/7/node = SubResource( 14 )
+nodes/fragment/7/node = SubResource( 4 )
 nodes/fragment/7/position = Vector2( -80, 160 )
-nodes/fragment/8/node = SubResource( 15 )
+nodes/fragment/8/node = SubResource( 5 )
 nodes/fragment/8/position = Vector2( -760, 240 )
-nodes/fragment/9/node = SubResource( 16 )
+nodes/fragment/9/node = SubResource( 6 )
 nodes/fragment/9/position = Vector2( -520, 160 )
 nodes/fragment/connections = PoolIntArray( 6, 0, 7, 0, 7, 0, 3, 0, 3, 0, 0, 0, 5, 0, 9, 0, 8, 0, 9, 1, 9, 0, 6, 0 )
 
-[sub_resource type="ShaderMaterial" id=10]
-shader = SubResource( 9 )
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 7 )
 shader_param/Speed = 0.5
 shader_param/Gradient = ExtResource( 2 )
 
-[sub_resource type="SphereMesh" id=6]
-material = SubResource( 10 )
+[sub_resource type="SphereMesh" id=9]
+material = SubResource( 8 )
 radial_segments = 16
 rings = 8
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=10]
 script/source = "extends Area
 
 func damage(amount,direction):
@@ -116,7 +116,7 @@ func damage(amount,direction):
 	set_collision_mask_bit(1,true)
 	pass"
 
-[sub_resource type="SphereShape" id=7]
+[sub_resource type="SphereShape" id=11]
 
 [node name="Fireball" type="Spatial"]
 script = ExtResource( 1 )
@@ -124,7 +124,7 @@ SPEED = 5
 
 [node name="Mesh" type="MeshInstance" parent="."]
 transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
-mesh = SubResource( 6 )
+mesh = SubResource( 9 )
 material/0 = null
 
 [node name="Hitbox" type="Area" parent="Mesh"]
@@ -132,7 +132,7 @@ monitoring = false
 monitorable = false
 collision_layer = 8
 collision_mask = 5
-script = SubResource( 4 )
+script = SubResource( 10 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Mesh/Hitbox"]
-shape = SubResource( 7 )
+shape = SubResource( 11 )

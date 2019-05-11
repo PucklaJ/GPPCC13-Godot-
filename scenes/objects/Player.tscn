@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://models/weapons/Sword.obj" type="ArrayMesh" id=2]
@@ -17,31 +17,24 @@
 [sub_resource type="PhysicsMaterial" id=1]
 
 [sub_resource type="GDScript" id=2]
-script/source = "extends Viewport
-
-func _ready():
-	own_world = true
-	pass"
-
-[sub_resource type="GDScript" id=3]
 script/source = "extends MeshInstance
 
 func _process(delta):
 	rotate_y(PI*delta)
 	pass"
 
-[sub_resource type="Environment" id=4]
+[sub_resource type="Environment" id=3]
 background_color = Color( 1, 1, 1, 0 )
 ambient_light_color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="GDScript" id=5]
+[sub_resource type="GDScript" id=4]
 script/source = "extends Control
 onready var tsize = get_child(0).texture.get_size()
 func _process(delta):
 	margin_left = OS.get_real_window_size().x/2.0-tsize.x/2.0
 	pass"
 
-[sub_resource type="Shader" id=6]
+[sub_resource type="Shader" id=5]
 code = "shader_type canvas_item;
 
 uniform vec4 color : hint_color;
@@ -52,11 +45,11 @@ void fragment() {
 	COLOR = vec4(bright,bright,bright,COLOR.a)*color;
 }"
 
-[sub_resource type="ShaderMaterial" id=7]
-shader = SubResource( 6 )
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
 shader_param/color = Color( 1, 0.117647, 0, 1 )
 
-[sub_resource type="GDScript" id=8]
+[sub_resource type="GDScript" id=7]
 script/source = "extends Node
 
 onready var collected_coin = get_child(0)
@@ -68,7 +61,7 @@ func new_collected_coin():
 	new_coin.collect()
 	pass"
 
-[sub_resource type="Shader" id=9]
+[sub_resource type="Shader" id=8]
 code = "shader_type canvas_item;
 
 uniform vec4 key_color : hint_color;
@@ -91,29 +84,29 @@ void fragment() {
 
 "
 
-[sub_resource type="ShaderMaterial" id=10]
-shader = SubResource( 9 )
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 8 )
 shader_param/key_color = null
 shader_param/key_color_padding = 0.4
 
-[sub_resource type="GDScript" id=11]
+[sub_resource type="GDScript" id=10]
 script/source = "extends Sprite
 
 func _process(delta):
 	position = OS.get_real_window_size()/2
 	pass"
 
-[sub_resource type="CapsuleShape" id=12]
+[sub_resource type="CapsuleShape" id=11]
 
-[sub_resource type="Environment" id=13]
+[sub_resource type="Environment" id=12]
 background_mode = 1
 ambient_light_color = Color( 1, 1, 1, 1 )
 ambient_light_energy = 0.01
 
-[sub_resource type="BoxShape" id=14]
+[sub_resource type="BoxShape" id=13]
 extents = Vector3( 0.5, 2.2, 0.5 )
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=14]
 length = 0.9
 step = 0.05
 tracks/0/type = "transform"
@@ -171,7 +164,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=15]
 length = 2.0
 loop = true
 tracks/0/type = "transform"
@@ -206,7 +199,7 @@ tracks/2/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( -5.361, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 5.361, 0, 0 ), Vector3( 0, 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=16]
 length = 0.8
 loop = true
 tracks/0/type = "transform"
@@ -241,7 +234,7 @@ tracks/2/keys = {
 "values": [ Vector3( 9, 0, 0 ), Vector3( 8.96547, 0.790867, 5.062 ), Vector3( 9, 0, 0 ), Vector3( 8.96547, -0.790867, -5.062 ), Vector3( 9, 0, 0 ), Vector3( 8.96547, 0.790867, 5.062 ), Vector3( 9, 0, 0 ), Vector3( 8.96547, -0.790867, -5.062 ), Vector3( 9, 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=17]
 loop = true
 tracks/0/type = "transform"
 tracks/0/path = NodePath(".")
@@ -275,33 +268,33 @@ tracks/2/keys = {
 "values": [ Vector3( 20, 0, 0 ), Vector3( -50, 0, 0 ), Vector3( 20, 0, 0 ) ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=19]
+[sub_resource type="AnimationNodeAnimation" id=18]
 animation = "idle"
 
-[sub_resource type="AnimationNodeBlend2" id=20]
+[sub_resource type="AnimationNodeBlend2" id=19]
 
-[sub_resource type="AnimationNodeAnimation" id=21]
+[sub_resource type="AnimationNodeAnimation" id=20]
 animation = "jump_mid"
 
-[sub_resource type="AnimationNodeBlend2" id=22]
+[sub_resource type="AnimationNodeBlend2" id=21]
 
-[sub_resource type="AnimationNodeAnimation" id=23]
+[sub_resource type="AnimationNodeAnimation" id=22]
 animation = "walk"
 
-[sub_resource type="AnimationNodeBlendTree" id=24]
+[sub_resource type="AnimationNodeBlendTree" id=23]
 graph_offset = Vector2( -33.4864, 133.721 )
-nodes/Idle/node = SubResource( 19 )
+nodes/Idle/node = SubResource( 18 )
 nodes/Idle/position = Vector2( 160, 140 )
-nodes/IdleWalkBlend/node = SubResource( 20 )
+nodes/IdleWalkBlend/node = SubResource( 19 )
 nodes/IdleWalkBlend/position = Vector2( 480, 140 )
-"nodes/Jump Mid/node" = SubResource( 21 )
+"nodes/Jump Mid/node" = SubResource( 20 )
 "nodes/Jump Mid/position" = Vector2( 160, 380 )
-nodes/JumpBlend/node = SubResource( 22 )
+nodes/JumpBlend/node = SubResource( 21 )
 nodes/JumpBlend/position = Vector2( 760, 140 )
-nodes/Walk/node = SubResource( 23 )
+nodes/Walk/node = SubResource( 22 )
 nodes/Walk/position = Vector2( 160, 260 )
 nodes/output/position = Vector2( 1020, 140 )
-node_connections = [ "output", 0, "JumpBlend", "JumpBlend", 0, "IdleWalkBlend", "JumpBlend", 1, "Jump Mid", "IdleWalkBlend", 0, "Idle", "IdleWalkBlend", 1, "Walk" ]
+node_connections = [ "output", 0, "JumpBlend", "IdleWalkBlend", 0, "Idle", "IdleWalkBlend", 1, "Walk", "JumpBlend", 0, "IdleWalkBlend", "JumpBlend", 1, "Jump Mid" ]
 
 [node name="Player" type="RigidBody"]
 collision_mask = 6
@@ -318,17 +311,17 @@ margin_bottom = 40.0
 
 [node name="CoinViewport" type="Viewport" parent="HUD/Coins"]
 size = Vector2( 75, 75 )
+own_world = true
 transparent_bg = true
 render_target_v_flip = true
-script = SubResource( 2 )
 
 [node name="Coin" parent="HUD/Coins/CoinViewport" instance=ExtResource( 8 )]
 transform = Transform( 0.75, 0, 0, 0, -3.27835e-08, -0.75, 0, 0.75, -3.27835e-08, 10, 0, 0 )
-script = SubResource( 3 )
+script = SubResource( 2 )
 
 [node name="Camera" type="Camera" parent="HUD/Coins/CoinViewport"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 2 )
-environment = SubResource( 4 )
+environment = SubResource( 3 )
 current = true
 fov = 50.0
 
@@ -356,7 +349,7 @@ margin_left = 540.0
 margin_top = 20.0
 margin_right = -540.0
 margin_bottom = 61.0
-script = SubResource( 5 )
+script = SubResource( 4 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -366,14 +359,14 @@ texture = ExtResource( 6 )
 centered = false
 
 [node name="Foreground" type="Sprite" parent="HUD/Lifebar"]
-material = SubResource( 7 )
+material = SubResource( 6 )
 texture = ExtResource( 5 )
 centered = false
 script = ExtResource( 7 )
 HEALTH_SPEED = 0.3
 
 [node name="CollectedCoins" type="Node" parent="HUD"]
-script = SubResource( 8 )
+script = SubResource( 7 )
 
 [node name="CollectedCoin" type="Sprite" parent="HUD/CollectedCoins"]
 position = Vector2( 640, 360 )
@@ -382,13 +375,13 @@ script = ExtResource( 10 )
 MOVE_TIME = 1.0
 
 [node name="Crosshair" type="Sprite" parent="HUD"]
-material = SubResource( 10 )
+material = SubResource( 9 )
 position = Vector2( 640, 360 )
 texture = ExtResource( 12 )
 vframes = 8
 hframes = 8
 frame = 19
-script = SubResource( 11 )
+script = SubResource( 10 )
 
 [node name="GroundSensors" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.988814, 0 )
@@ -421,11 +414,11 @@ collision_mask = 6
 
 [node name="Capsule" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.51287, 0 )
-shape = SubResource( 12 )
+shape = SubResource( 11 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.52855, 0 )
-environment = SubResource( 13 )
+environment = SubResource( 12 )
 current = true
 script = ExtResource( 4 )
 AXIS_SENSITIVITY_X = 25.0
@@ -456,17 +449,17 @@ script = ExtResource( 13 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Camera/WeaponContainer/Weapon/Hitbox"]
 transform = Transform( 1, 0, -9.31323e-10, 2.98023e-08, 0.999999, -9.31323e-10, -9.31323e-10, 0, 0.999999, 0, 0, 0 )
-shape = SubResource( 14 )
+shape = SubResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera/WeaponContainer"]
-anims/attack1 = SubResource( 15 )
-anims/idle = SubResource( 16 )
-anims/jump_mid = SubResource( 17 )
-anims/walk = SubResource( 18 )
+anims/attack1 = SubResource( 14 )
+anims/idle = SubResource( 15 )
+anims/jump_mid = SubResource( 16 )
+anims/walk = SubResource( 17 )
 blend_times = [ "jump", "jump_mid", 0.5 ]
 
 [node name="AnimationTree" type="AnimationTree" parent="Camera/WeaponContainer"]
-tree_root = SubResource( 24 )
+tree_root = SubResource( 23 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/IdleWalkBlend/blend_amount = 1.0
 parameters/JumpBlend/blend_amount = 0.0

@@ -9,7 +9,7 @@ bounce = 0.1
 
 [sub_resource type="CapsuleShape" id=2]
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=3]
 script/source = "extends Area
 
 func _ready():
@@ -27,7 +27,7 @@ func on_body_exited(body):
 		get_parent().attacking = false
 	pass"
 
-[sub_resource type="SphereShape" id=3]
+[sub_resource type="SphereShape" id=4]
 radius = 20.0
 
 [node name="Skeleton" type="RigidBody"]
@@ -55,8 +55,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.48081, 0 )
 [node name="AI distance" type="Area" parent="."]
 input_ray_pickable = false
 monitorable = false
-script = SubResource( 4 )
+script = SubResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="AI distance"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.04601, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )

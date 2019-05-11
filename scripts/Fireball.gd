@@ -8,12 +8,15 @@ onready var hitbox = get_node("Mesh/Hitbox")
 var direction = Vector3(0,0,0)
 var shoot_pos = Vector3(0,0,0)
 
+func _ready():
+    hitbox.connect("body_entered",self,"on_body_enter")
+    pass
+
 func set_direction():
     shoot_pos = globals.player.get_node("ShootPosition").get_global_transform().origin
     direction = (shoot_pos - get_global_transform().origin).normalized()
     hitbox.set_collision_mask_bit(0,true)    
-    hitbox.set_collision_mask_bit(1,false)    
-    hitbox.connect("body_entered",self,"on_body_enter")
+    hitbox.set_collision_mask_bit(1,false)
     pass
 
 func _process(delta):
